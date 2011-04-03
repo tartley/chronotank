@@ -10,7 +10,7 @@ import os
 # the goods are placed in the dist dir for you to .zip up or whatever...
 
 
-APP_NAME = 'pyweek11'
+APP_NAME = 'pyweek12'
 DESCRIPTION = open('README.txt').read()
 CHANGES = open('CHANGES.txt').read()
 TODO = open('TODO.txt').read()
@@ -24,7 +24,7 @@ METADATA = {
     'description':      'A game for PyWeek 11',
     'author':           'various',
     'author_email':     'renesd@gmail.com',
-    'url':              'https://bitbucket.org/tartley/pyweek11',
+    'url':              'https://bitbucket.org/tartley/pyweek12',
     'classifiers':      [
             'Development Status :: 4 - Beta',
             'Intended Audience :: End Users/Desktop',
@@ -32,13 +32,7 @@ METADATA = {
             'License :: OSI Approved :: BSD License',
             'Operating System :: OS Independent',
             'Programming Language :: Python :: 2',
-            'Programming Language :: Python :: 2.5',
-            'Programming Language :: Python :: 2.6',
             'Programming Language :: Python :: 2.7',
-            'Programming Language :: Python :: 3',
-            'Programming Language :: Python :: 3.0',
-            'Programming Language :: Python :: 3.1',
-            'Programming Language :: Python :: 3.2',
             'Topic :: Software Development :: Libraries :: pygame',
             'Topic :: Games/Entertainment :: Real Time Strategy',
     ],
@@ -75,11 +69,11 @@ cmdclass = {}
 PACKAGEDATA = {
     'cmdclass':    cmdclass,
 
-    'package_dir': {'pyweek11': 'pyweek11',
+    'package_dir': {'pyweek12': 'pyweek12',
                    },
-    'packages': ['pyweek11',
+    'packages': ['pyweek12',
                 ],
-    'scripts': ['scripts/pyweek11'],
+    'scripts': ['scripts/pyweek12'],
 }
 
 PACKAGEDATA.update(METADATA)
@@ -118,7 +112,7 @@ def add_files(dest,generator):
             dest.append(filename)
 
 # define what is our data
-_DATA_DIR = os.path.join('pyweek11', 'data')
+_DATA_DIR = os.path.join('pyweek12', 'data')
 data = []
 add_files(data,os.walk(_DATA_DIR))
 
@@ -127,7 +121,7 @@ add_files(data,os.walk(_DATA_DIR))
 
 #data_dirs = [os.path.join(f2.replace(_DATA_DIR, 'data'), '*') for f2 in data]
 data_dirs = [os.path.join(f2.replace(_DATA_DIR, 'data')) for f2 in data]
-PACKAGEDATA['package_data'] = {'pyweek11': data_dirs}
+PACKAGEDATA['package_data'] = {'pyweek12': data_dirs}
 
 
 
@@ -137,7 +131,7 @@ data.extend(glob.glob('*.txt'))
 #data.append('MANIFEST.in')
 # define what is our source
 src = []
-add_files(src,os.walk('pyweek11'))
+add_files(src,os.walk('pyweek12'))
 src.extend(glob.glob('*.py'))
 
 

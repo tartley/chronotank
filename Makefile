@@ -1,4 +1,4 @@
-#fake Makefile for pyweek11, to support the common
+#fake Makefile for pyweek12, to support the common
 # ./configure;make;make install
 
 PYTHON = python
@@ -29,15 +29,15 @@ testall:
 
 clean:
 	rm -rf build dist MANIFEST .coverage
-	rm -f pyweek11/*~
-	rm -rf bin develop-eggs eggs parts .installed.cfg pyweek11.egg-info
+	rm -f pyweek12/*~
+	rm -rf bin develop-eggs eggs parts .installed.cfg pyweek12.egg-info
 	find . -name *.pyc -exec rm {} \;
 	find . -name *.swp -exec rm {} \;
 	$(PYTHON) setup.py clean
 
 # push changes
 push:
-	#bzr push lp:pyweek11
+	#bzr push lp:pyweek12
 	svn commit
 
 # commit changes

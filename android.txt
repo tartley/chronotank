@@ -1,4 +1,4 @@
-title=pyweek11
+title=pyweek12
 author=yourgameauthor
 api=1
 orientation=landscape
