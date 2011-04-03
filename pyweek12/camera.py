@@ -14,7 +14,6 @@ class Camera(object):
     transforms so that subsequent renders are drawn at the correct place, size
     and orientation on screen
     """
-
     def __init__(self, offset, scale, angle=0.0):
         self.x, self.y = offset
         self.scale = scale
@@ -28,22 +27,19 @@ class Camera(object):
         is centered on self.(x,y), shows at least scale world units in every
         direction, and is oriented by angle.
         """
-        glMatrixMode(GL_PROJECTION)
-        glLoadIdentity()
+        left = bottom = -self.scale
+        right = top = self.scale
         if aspect >= 1:
             # landscape
-            gluOrtho2D(
-                -self.scale * aspect,
-                +self.scale * aspect,
-                -self.scale,
-                +self.scale)
+            left *= aspect
+            right *= aspect
         else:
             # portrait
-            gluOrtho2D(
-                -self.scale,
-                +self.scale,
-                -self.scale / aspect,
-                +self.scale / aspect)
+            bottom /= aspect
+            top /= aspect
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        gluOrtho2D(left, right, bottom, top)
 
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()

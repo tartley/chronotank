@@ -30,7 +30,7 @@ class Eventloop(object):
 
         self.window.on_draw = on_draw
         self.window.on_key_press = self.on_key_press
-
+        self.window.on_resize = render.on_resize
 
     def run(self, update):
         '''

@@ -1,4 +1,5 @@
 
+from __future__ import division
 from pyglet import gl, clock
 import rabbyt
 
@@ -11,7 +12,12 @@ class Render(object):
         self.options = options
         self.clock_display = None
         rabbyt.set_default_attribs()
+        self.width, self.height = None, None
 
+    def on_resize(self, width, height):
+        gl.glViewport(0, 0, width, height)
+        self.width = width
+        self.height = height
 
     def clear_window(self, color):
         '''
@@ -27,7 +33,7 @@ class Render(object):
         Redraw the whole window
         '''
         self.clear_window(self.world.background_color)
-        self.camera.world_projection(1.67)
+        self.camera.world_projection(self.width / self.height)
         self.draw_world()
         if self.options.fps:
             if self.clock_display is None:
@@ -44,7 +50,7 @@ class Render(object):
         '''
         Draw any display items overlaid on the world, such as FPS counter
         '''
-        self.camera.hud_projection((800, 600))
+        self.camera.hud_projection((self.width, self.height))
         gl.glEnableClientState(gl.GL_VERTEX_ARRAY)
         gl.glEnableClientState(gl.GL_COLOR_ARRAY)
 

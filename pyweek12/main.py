@@ -19,7 +19,9 @@ def main():
     world = World()
     item = Sprite(
         join(DATA, 'images', 'car.png'),
-        x=10,y=20,scale=2.0,rot=45,
+        x=0, y=0,
+        scale=2.0,
+        rot=45,
     )
     def randomize_rot(*_):
         item.rot = uniform(0,360)
