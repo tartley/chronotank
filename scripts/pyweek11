@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import pyweek11.main
+import pyweek12.main
 if __name__ == "__main__":
-    pyweek11.main.main()
+    pyweek12.main.main()
 
