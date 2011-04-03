@@ -5,8 +5,9 @@ import rabbyt
 
 class Render(object):
 
-    def __init__(self, world, options):
+    def __init__(self, world, camera, options):
         self.world = world
+        self.camera = camera
         self.options = options
         self.clock_display = None
         rabbyt.set_default_attribs()
@@ -26,8 +27,7 @@ class Render(object):
         Redraw the whole window
         '''
         self.clear_window(self.world.background_color)
-        #self.projection.set_perspective(45)
-        #self.modelview.set_world()
+        self.camera.world_projection(1.67)
         self.draw_world()
         if self.options.fps:
             if self.clock_display is None:
@@ -44,8 +44,7 @@ class Render(object):
         '''
         Draw any display items overlaid on the world, such as FPS counter
         '''
-        #self.projection.set_screen()
-        #self.modelview.set_identity()
+        self.camera.hud_projection((800, 600))
         gl.glEnableClientState(gl.GL_VERTEX_ARRAY)
         gl.glEnableClientState(gl.GL_COLOR_ARRAY)
 

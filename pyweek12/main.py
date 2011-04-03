@@ -1,10 +1,12 @@
 
 import sys
 from os.path import join
+from random import uniform
 
 import pyglet
 from rabbyt.sprites import Sprite
 
+from .camera import Camera
 from .eventloop import Eventloop
 from .options import Options
 from .path import DATA
@@ -19,6 +21,9 @@ def main():
         join(DATA, 'images', 'car.png'),
         x=10,y=20,scale=2.0,rot=45,
     )
+    def randomize_rot(*_):
+        item.rot = uniform(0,360)
+    item.update = randomize_rot
     world.add(item)
     window = pyglet.window.Window(
         fullscreen=options.fullscreen,
@@ -26,7 +31,8 @@ def main():
         visible=False,
         resizable=True,
     )
-    render = Render(world, options)
+    camera = Camera((0, 0), 100)
+    render = Render(world, camera, options)
     eventloop = Eventloop(window, world, render, options)
     eventloop.run(world.update)
 
