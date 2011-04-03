@@ -45,7 +45,7 @@ class World(object):
 
         Fires the self.item_added event.
         '''
-        self.items[item.id] = item
+        self.items[id(item)] = item
         self.item_added.fire(item)
 
     def remove(self, item):
@@ -54,7 +54,7 @@ class World(object):
 
         Fires the self.item_removed event.
         '''
-        del self.items[item.id]
+        del self.items[id(item)]
         self.item_removed.fire(item)
         item.position = None
 
@@ -66,7 +66,7 @@ class World(object):
         '''
         self.age += dt
         self.update.fire(self.age, dt)
-        for item in self:
-            if item.update:
-                item.update(item, self.age, dt)
+        #for item in self:
+            #if item.update:
+                #item.update(item, self.age, dt)
 

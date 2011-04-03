@@ -1,5 +1,6 @@
 
 from pyglet import gl, clock
+import rabbyt
 
 
 class Render(object):
@@ -8,6 +9,7 @@ class Render(object):
         self.world = world
         self.options = options
         self.clock_display = None
+        rabbyt.set_default_attribs()
 
 
     def clear_window(self, color):
@@ -34,7 +36,8 @@ class Render(object):
 
 
     def draw_world(self):
-        pass
+        for item in self.world:
+            item.render()
 
 
     def draw_hud(self):

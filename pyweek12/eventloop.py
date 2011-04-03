@@ -4,40 +4,27 @@ import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import key
 
-from .world import World
 from .screenshot import screenshot
 
 
 
 class Eventloop(object):
     '''
-    .. function:: __init__()
-        
-        Parses the command-line options, stores results in self.options
+    .. function:: __init__(options)
+
+    Initialise EventLoop. Must be called before calling :func:`run` to start
+    the event loop. You may pass in a pyglet.window.Window instance, or
+    if it is None, we will create a (non-visible) one, using self.options
+    to determine its parameters.
     '''
-    def __init__(self, options):
+    def __init__(self, window, world, render, options):
+        self.window = window
+        self.world = world
+        self.render = render
         self.options = options
-        self.window = None
-        self.world = None
-
-
-    def init(self, draw):
-        '''
-        Initialise EventLoop. Must be called before calling :func:`run` to start
-        the event loop. You may pass in a pyglet.window.Window instance, or
-        if it is None, we will create a (non-visible) one, using self.options
-        to determine its parameters.
-        '''
-        self.world = World()
-        self.window = pyglet.window.Window(
-            fullscreen=self.options.fullscreen,
-            vsync=self.options.vsync,
-            visible=False,
-            resizable=True,
-        )
 
         def on_draw():
-            draw()
+            render.draw()
             self.window.invalid = False
             return EVENT_HANDLED
 
@@ -47,7 +34,7 @@ class Eventloop(object):
 
     def run(self, update):
         '''
-        Schedules calls to self.update, makes window visible and starts the
+        Schedules calls to update, makes window visible and starts the
         event loop by calling pyglet.app.run()
         '''
         pyglet.clock.schedule(self.update)
