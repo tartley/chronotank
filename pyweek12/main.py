@@ -17,16 +17,22 @@ from .world import World
 def main():
     options = Options(sys.argv)
     world = World()
-    item = Sprite(
-        join(DATA, 'images', 'car.png'),
-        x=0, y=0,
-        scale=2.0,
-        rot=45,
-    )
-    def randomize_rot(*_):
-        item.rot = uniform(0,360)
-    item.update = randomize_rot
-    world.add(item)
+
+    def rotate(item, *_):
+        item.rot += item.angular_velocity
+
+    for _ in xrange(400):
+        item = Sprite(
+            join(DATA, 'images', 'car.png'),
+            x=uniform(-100, 100),
+            y=uniform(-100, 100),
+            scale=uniform(0.1, 0.5),
+            rot=uniform(0, 360),
+        )
+        item.update = rotate
+        item.angular_velocity = uniform(-0.1, +0.1)
+        world.add(item)
+
     window = pyglet.window.Window(
         fullscreen=options.fullscreen,
         vsync=options.vsync,
