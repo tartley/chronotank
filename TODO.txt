@@ -1,5 +1,34 @@
+Convert one of the sprites into a keyboard-controlled vehicle
+
+Camera follows player's vehicle.
+
+Convert other sprites into stationary obstacles (bushes, walls, boulders)
+
+Use Rabbyt collision detection to see whethre the player is colliding with anything
+
+Add collision response, to stop the player driving through obstacles
+
+Add a countdown timer
+When timer reaches zero, player's position is reset to start
+
+Add a 'player echo', which replays the player's movements
+
+Start point is some sort of funky 'exit from the time machine' special effect
+
+Add a 'goal portal' : any player image colliding with this successfully completes the game
+
+Display congrats and score when game is completed 
+
+Finish this TODO list so we know how much is left to do
+
+Design levels and player interactions (e.g. place doors and switches)
 
 
-TODO
+Done
 ====
+
+Get some sprites onscreen, rendered by Rabbyt
+Add camera which can scroll around (to follow the player.) Also, as bonus,
+it can rotate or zoom in or out - not sure we'll use this except maybe for
+special effect 'camera shake' on explosions, crashes?
 
