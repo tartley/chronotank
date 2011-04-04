@@ -21,7 +21,7 @@ def main():
     def rotate(item, *_):
         item.rot += item.angular_velocity
 
-    for _ in xrange(400):
+    for _ in xrange(100):
         item = Sprite(
             join(DATA, 'images', 'car.png'),
             x=uniform(-100, 100),
@@ -32,6 +32,17 @@ def main():
         item.update = rotate
         item.angular_velocity = uniform(-0.1, +0.1)
         world.add(item)
+
+    item = Sprite(
+        join(DATA, 'images', 'tank.png'),
+        x=uniform(-100, 100),
+        y=uniform(-100, 100),
+        scale=uniform(0.1, 0.5),
+        rot=uniform(0, 360),
+    )
+    item.update = rotate
+    item.angular_velocity = uniform(-0.1, +0.1)
+    world.add(item)
 
     window = pyglet.window.Window(
         fullscreen=options.fullscreen,
