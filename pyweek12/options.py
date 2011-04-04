@@ -19,7 +19,7 @@ class Options(object):
     `fps`: Display frames per second in lower-left of screen.
     '''
     def __init__(self, argv):
-        self.vsync = '--vsync' in argv
+        self.vsync = '--novsync' not in argv
         self.fullscreen = '--window' not in argv and '-w' not in argv
         self.fps = '--fps' in argv
 
