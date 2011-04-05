@@ -1,18 +1,33 @@
-Tank can be driven with keyboard
-    modify code that sets position += speed * rot, to allow for slight skids
-    Release brake after stopping and press it again to go into reverse,
-    Reverse is half speed.
-
 Design levels and player interactions (e.g. place doors and switches)
 
 Camera follows player's vehicle.
+
+Sound effects:
+    Engine noises - revs higher/faster as you accelerate.
+    Chronostatic as you emerge from the entry portal
+    'clang' on fast collision with rocks and walls
+    pleasant flourish for point being scored
+    Slight squeak for brakes being applied
+
+More SVG required:
+    * Boulders and rocky outcrops (circular collision boundaries, or collection
+      of several circles)
+    * Mayan ruins: buildings and walls, which will form axis-aligned rectangular
+      obstacles to define rooms, etc.
+    * Stone pressure pads in the ground which the tank will drive on to
+      activate.
+    * entry portal - flashy special effect which player emerges from. This will
+      hang around continuisly, so needs to be long-running cycling animation
+    * Goal portal - some variation on the entry portal (we can actually do
+      this in code using the same SVG, adding color tints or different
+      animation params)
+    
+Convert SVG into bitmaps, stationary obstacles (bushes, walls, boulders)
 
 Render items in layers:
     0 weeds, flowers
     1 tank
     2 trees / bushes
-
-Convert other sprites into stationary obstacles (bushes, walls, boulders)
 
 Use Rabbyt collision detection to see whether the player is colliding with
 anything. See advice at:
@@ -37,9 +52,10 @@ Add force fields.
 
 Add pressure switches. Sitting on one disables a forcefield.
 
-Several pressure switches may be required to deactivate a single forcefield.
+Populate the word to create the layout of the level at game start.
+    - do we load levels from disk? Can we make an in-game level editor?
 
-Create the level.
+Several pressure switches may be required to deactivate a single forcefield.
 
 Goal portal only appears after completing all tasks in the level.
 
@@ -66,12 +82,9 @@ Score one for each item of progress towards the goal.
 
 Display the score.
 
-Sound effects:
-    Engine noise.
-    Engine revs higher/faster as you accelerate.
-    Chronostatic as you emerge from the entry portal
-    'clang' on fast collision with a rock.
-    point being scored
+modify tank handling to allow for slight skids
+Release brake after stopping and press it again to go into reverse,
+Reverse is half speed.
 
 Animate the tank treads
 
