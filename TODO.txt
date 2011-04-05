@@ -54,6 +54,7 @@ Get Harry to record some voiceover announcements
     Welcome
     Chronotank
     Game Over
+    5... 4... 3... 2... 1...
 
 Display congrats and score when game is completed 
 
