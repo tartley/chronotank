@@ -7,17 +7,18 @@ import pyglet
 from .camera import Camera
 from .color import Color
 from .eventloop import Eventloop
-from .gameitem import Decoration, Tank
+from .gameitem import Greenery
 from .options import Options
 from .render import Render
+from .tank import Tank
 from .world import World
 
 
 def populate(world):
     for _ in xrange(100):
-        world.add( Decoration('bush.png', green=uniform(0.6, 1)) )
-        world.add( Decoration('weed.png', green=uniform(0.4, 0.7)) )
-        world.add( Decoration('flower.png', rot=uniform(-35, 5), scale=0.75) )
+        world.add( Greenery('bush.png', green=uniform(0.6, 1)) )
+        world.add( Greenery('weed.png', green=uniform(0.4, 0.7)) )
+        world.add( Greenery('flower.png', rot=uniform(-35, 5), scale=0.75) )
 
 
 def add_player(world):

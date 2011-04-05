@@ -1,5 +1,5 @@
 Tank can be driven with keyboard
-    Hold brake (down) to slow to a stop.
+    brake to rapidly slow to a stop
     Release brake after stopping and press it again to go into reverse,
     Reverse is half speed.
 
@@ -104,4 +104,10 @@ special effect 'camera shake' on crashes
 convert cars into bushes, weeds, flowers
 
 Add a single tank
+
+Tank can be driven with keyboard
+    accel to accel
+    left and right to rotate
+    forward motion in direction tank is facing
+    cursors or WASD
 
