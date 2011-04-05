@@ -68,5 +68,5 @@ class World(object):
         self.update.fire(self.age, dt)
         for item in self:
             if hasattr(item, 'update'):
-                item.update(item, self.age, dt)
+                item.update(self.age, dt)
 

@@ -1,6 +1,9 @@
 
 from os.path import join
+from math import cos, sin, radians
 from random import uniform
+
+from pyglet.window import key
 
 from rabbyt.sprites import Sprite
 
@@ -85,4 +88,18 @@ class Tank(GameItem):
 
     def __init__(self, **kwargs):
         GameItem.__init__(self, 'tank.png', **kwargs)
+        self.keystate = key.KeyStateHandler()
+        self.speed = 0.0
+
+    def update(self, time, dt):
+        if self.keystate[key.SPACE]:
+            self.speed += 0.6
+        if self.keystate[key.LEFT]:
+            self.rot += 3
+        elif self.keystate[key.RIGHT]:
+            self.rot -= 3
+
+        self.speed *= 0.98
+        self.x -= self.speed * sin(radians(self.rot))
+        self.y += self.speed * cos(radians(self.rot))
 

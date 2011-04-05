@@ -20,16 +20,12 @@ def populate(world):
         world.add( Decoration('flower.png', rot=uniform(-35, 5), scale=0.75) )
 
 
-def rotate(item, _, dt):
-    item.rot += item.angular_velocity * dt
-
-
 def add_player(world):
-    world.add( Tank(
+    player = Tank(
         x=0, y=0,
-        update=rotate,
         angular_velocity=20,
-    ) )
+    )
+    world.add( player )
 
 
 def main():
