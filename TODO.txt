@@ -1,4 +1,4 @@
-Convert one of the sprites into a keyboard-controlled tank.
+Tank can be driven with keyboard
     Hold brake (down) to slow to a stop.
     Release brake after stopping and press it again to go into reverse,
     Reverse is half speed.
@@ -21,10 +21,13 @@ Add a countdown timer
 When timer reaches zero, player's position is reset to start
 
 Add a 'player echo', which replays the player's movements
+One new echo for each countdown
+
+Nine lives exactly.
 
 Start point is some sort of funky 'exit from the time machine' special effect
 
-Add a 'goal portal' : any player image colliding with this successfully
+Add a 'goal portal' gameitem: any player image colliding with this successfully
 completes the game
 
 Add force fields.
@@ -36,8 +39,6 @@ Several pressure switches may be required to deactivate a single forcefield.
 Create the level.
 
 Goal portal only appears after completing all tasks in the level.
-
-Nine lives exactly.
 
 Display remaining lives on the HUD
 
@@ -98,4 +99,8 @@ Get some sprites onscreen, rendered by Rabbyt
 Add camera which can scroll around (to follow the player.) Also, as bonus,
 it can rotate or zoom in or out - not sure we'll use this. Maybe for
 special effect 'camera shake' on crashes
+
+convert cars into bushes, weeds, flowers
+
+Add a single tank
 

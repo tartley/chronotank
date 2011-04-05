@@ -20,7 +20,7 @@ class GameItem(object):
         for name, value in kwargs.iteritems():
             setattr(self, name, value)
 
-    # define properties that delegate to storage on the sprite
+    # properties that delegate to storage on the sprite
 
     def __get_x(self):
         return self.sprite.x
