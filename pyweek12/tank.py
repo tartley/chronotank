@@ -20,13 +20,11 @@ class Tank(GameItem):
             self.speed *= 0.9
 
         if self.keystate[key.LEFT] or self.keystate[key.A]:
-            self.rot += 3
+            self.rot += 2
         elif self.keystate[key.RIGHT] or self.keystate[key.D]:
-            self.rot -= 3
+            self.rot -= 2
 
-        drag = 0.98 * (1 - 0.1 / (1 + abs(self.speed)))
-        print "%0.3f" % (drag,),
-        self.speed *= drag
+        self.speed *= 0.98
         self.x -= self.speed * sin(radians(self.rot))
         self.y += self.speed * cos(radians(self.rot))
 

@@ -175,9 +175,3 @@ Color.White        = Color(1.000, 1.000, 1.000)
 Color.LightGrey    = Color(0.753, 0.753, 0.753)
 Color.DarkGrey     = Color(0.251, 0.251, 0.251)
 
-Color.All = {
-    name: value
-    for name, value in Color.__dict__.iteritems()
-    if isinstance(value, Color)
-}
-
