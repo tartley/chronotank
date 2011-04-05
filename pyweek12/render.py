@@ -43,7 +43,7 @@ class Render(object):
 
     def draw_world(self):
         for item in self.world:
-            item.render()
+            item.sprite.render()
 
 
     def draw_hud(self):

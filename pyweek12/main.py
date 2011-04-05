@@ -1,50 +1,23 @@
 
 import sys
-from os.path import join
 from random import uniform
 
 import pyglet
-from rabbyt.sprites import Sprite
 
 from .camera import Camera
 from .color import Color
 from .eventloop import Eventloop
+from .gameitem import Decoration, Tank
 from .options import Options
-from .path import DATA
 from .render import Render
 from .world import World
 
 
 def populate(world):
     for _ in xrange(100):
-        item = Sprite(
-            join(DATA, 'images', 'bush.png'),
-            x=uniform(-2000, 2000),
-            y=uniform(-2000, 2000),
-            scale=uniform(0.5, 2),
-            rot=uniform(0, 360),
-            green=uniform(0.6, 1),
-        )
-        world.add(item)
-    for _ in xrange(50):
-        item = Sprite(
-            join(DATA, 'images', 'weed.png'),
-            x=uniform(-2000, 2000),
-            y=uniform(-2000, 2000),
-            scale=uniform(0.5, 1),
-            rot=uniform(0, 360),
-            green=uniform(0.6, 1),
-        )
-        world.add(item)
-    for _ in xrange(50):
-        item = Sprite(
-            join(DATA, 'images', 'flower.png'),
-            x=uniform(-2000, 2000),
-            y=uniform(-2000, 2000),
-            scale=uniform(0.5, 1),
-            green=uniform(0.6, 1),
-        )
-        world.add(item)
+        world.add( Decoration('bush.png', green=uniform(0.6, 1)) )
+        world.add( Decoration('weed.png', green=uniform(0.4, 0.7)) )
+        world.add( Decoration('flower.png', rot=uniform(-35, 5), scale=0.75) )
 
 
 def rotate(item, _, dt):
@@ -52,14 +25,11 @@ def rotate(item, _, dt):
 
 
 def add_player(world):
-    item = Sprite(
-        join(DATA, 'images', 'tank.png'),
+    world.add( Tank(
         x=0, y=0,
-        scale=1,
-    )
-    item.update = rotate
-    item.angular_velocity = 20
-    world.add(item)
+        update=rotate,
+        angular_velocity=20,
+    ) )
 
 
 def main():
