@@ -1,5 +1,5 @@
 Tank can be driven with keyboard
-    Hold brake (down) to slow to a stop.
+    modify code that sets position += speed * rot, to allow for slight skids
     Release brake after stopping and press it again to go into reverse,
     Reverse is half speed.
 
@@ -7,7 +7,10 @@ Design levels and player interactions (e.g. place doors and switches)
 
 Camera follows player's vehicle.
 
-Finish this TODO list so we know how much is left to do
+Render items in layers:
+    0 weeds, flowers
+    1 tank
+    2 trees / bushes
 
 Convert other sprites into stationary obstacles (bushes, walls, boulders)
 
@@ -104,4 +107,11 @@ special effect 'camera shake' on crashes
 convert cars into bushes, weeds, flowers
 
 Add a single tank
+
+Tank can be driven with keyboard
+    accel to accel
+    left and right to rotate
+    forward motion in direction tank is facing
+    cursors or WASD
+    brake to rapidly slow to a stop
 

@@ -1,0 +1,32 @@
+from math import cos, sin, radians
+
+from pyglet.window import key
+
+from .gameitem import GameItem
+
+
+class Tank(GameItem):
+
+    def __init__(self, **kwargs):
+        GameItem.__init__(self, 'tank.png', **kwargs)
+        self.keystate = key.KeyStateHandler()
+        self.speed = 0.0
+
+    def update(self, time, dt):
+
+        if self.keystate[key.UP] or self.keystate[key.W]:
+            self.speed += 1
+        elif self.keystate[key.DOWN] or self.keystate[key.S]:
+            self.speed *= 0.9
+
+        if self.keystate[key.LEFT] or self.keystate[key.A]:
+            self.rot += 3
+        elif self.keystate[key.RIGHT] or self.keystate[key.D]:
+            self.rot -= 3
+
+        drag = 0.98 * (1 - 0.1 / (1 + abs(self.speed)))
+        print "%0.3f" % (drag,),
+        self.speed *= drag
+        self.x -= self.speed * sin(radians(self.rot))
+        self.y += self.speed * cos(radians(self.rot))
+
