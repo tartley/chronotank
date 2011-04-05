@@ -15,25 +15,33 @@ More SVG required:
     * Mayan ruins: buildings and walls, which will form axis-aligned rectangular
       obstacles to define rooms, etc.
     * Stone pressure pads in the ground which the tank will drive on to
-      activate.
-    * entry portal - flashy special effect which player emerges from. This will
+      activate. (With 'normal' and 'depressed' appearance)
+    * Entry portal - flashy special effect which player emerges from. This will
       hang around continuisly, so needs to be long-running cycling animation
-    * Goal portal - some variation on the entry portal (we can actually do
+    * Goal portal - some variation on the entry portal (we could just do
       this in code using the same SVG, adding color tints or different
       animation params)
     
 Convert SVG into bitmaps, stationary obstacles (bushes, walls, boulders)
 
 Render items in layers:
-    0 weeds, flowers
-    1 tank
-    2 trees / bushes
+    0 weeds, flowers - things your tank drives over.
+    1 tank images (previous player tanks.)
+    2 current tank
+    3 trees / bushes - things player drives under.
+    4 hud
 
 Use Rabbyt collision detection to see whether the player is colliding with
 anything. See advice at:
 http://groups.google.com/group/rabbyt/browse_frm/thread/9da3abc732599b76
 
 Add collision response, to stop the player driving through obstacles
+
+test py2exe
+
+test py2app
+
+test cx_freeze
 
 Add a countdown timer
 When timer reaches zero, player's position is reset to start
