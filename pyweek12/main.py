@@ -27,6 +27,8 @@ def add_player(world):
         angular_velocity=20,
     )
     world.add( player )
+    return player
+
 
 
 def main():
@@ -35,7 +37,7 @@ def main():
     world = World()
     world.background_color = Color(0.1, 0.3, 0)
     populate(world)
-    add_player(world)
+    player = add_player(world)
 
     window = pyglet.window.Window(
         fullscreen=options.fullscreen,
@@ -44,8 +46,15 @@ def main():
         resizable=True,
     )
     camera = Camera((0, 0), 800)
-    render = Render(world, camera, options)
 
+    def make_follow_player(player):
+        def follow_player(item, time, dt):
+            item.x = player.x
+            item.y = player.y
+        return follow_player
+    camera.update = make_follow_player(player)
+
+    render = Render(world, camera, options)
     eventloop = Eventloop(window, world, render, options)
     eventloop.run(world.update)
 

@@ -32,6 +32,7 @@ class Render(object):
         '''
         Redraw the whole window
         '''
+        self.camera.update(self.camera, 0, 0)
         self.clear_window(self.world.background_color)
         self.camera.world_projection(self.width / self.height)
         self.draw_world()
