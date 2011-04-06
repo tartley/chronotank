@@ -12,7 +12,22 @@ class Render(object):
         self.options = options
         self.clock_display = None
         rabbyt.set_default_attribs()
+        
+        # lists of sprites to render, keyed by layer
+        self.sprites = {}
+        world.item_added += self.on_item_added
+        world.item_removed += self.on_item_removed
+        for item in world:
+            self.on_item_added(item)
 
+
+    def on_item_added(self, item):
+        if hasattr(item, 'sprite'):
+            self.sprites.setdefault(item.layer, []).append(item.sprite)
+
+    def on_item_removed(self, item):
+        if hasattr(item, 'sprite'):
+            self.sprites[item.layer].remove(item.sprite)
 
     def clear_window(self, color):
         '''
@@ -29,9 +44,9 @@ class Render(object):
         '''
         self.clear_window(self.world.background_color)
         self.camera.world_projection()
-        for item in self.world:
-            if hasattr(item, 'sprite'):
-                item.sprite.render()
+
+        for layer in sorted(self.sprites.iterkeys()):
+            rabbyt.render_unsorted( self.sprites[layer] )
 
         self.draw_hud()
 

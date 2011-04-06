@@ -10,7 +10,7 @@ from .path import DATA
 class GameItem(object):
 
     image_name = None # needs overriding in derived classes
-    level = 0
+    layer = 0
 
     def __init__(self, **kwargs):
         if 'x' not in kwargs:

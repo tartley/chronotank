@@ -29,6 +29,7 @@ class Flower(Greenery):
     image_name = 'flower.png'
     def __init__(self, **kwargs):
         Greenery.__init__(self, **kwargs)
+        self.scale = uniform(0.5, 1)
         self.rot = uniform(-20, 20)
 
 class Weed(Greenery):
