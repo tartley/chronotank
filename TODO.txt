@@ -1,33 +1,27 @@
 Design levels and player interactions (e.g. place doors and switches)
 
-Camera follows player's vehicle.
-
 Sound effects:
-    Engine noises - revs higher/faster as you accelerate.
-    Static noise for the entry portal
-    'Pop' as you emerge from the entry portal
-    'clang' on fast collision with rocks and walls
-    slight click as stone pressure plates are depressed
-    rumble of large heavy stone doors opening
-    pleasant flourish for point being scored
-    Slight squeak for brakes being applied
-
+    * Engine noises - revs higher/faster as you accelerate.
+    * Static noise for the entry portal
+    * 'Pop' as you emerge from the entry portal
+    * 'Clang' on fast collision with rocks and walls
+    * Slight click as stone pressure plates are depressed
+    * rumble of large heavy stone doors opening
+    * Jungle noises!
+    * Pleasant flourish for point being scored
+    * Slight squeak for brakes being applied
 
 More SVG required:
     * Boulders and rocky outcrops (circular collision boundaries, or collection
       of several circles)
     * Mayan ruins: buildings and walls, which will form axis-aligned rectangular
       obstacles to define rooms, etc.
-    * Stone pressure pads in the ground which the tank will drive on to
-      activate. (With 'normal' and 'depressed' appearance)
     * Entry portal - flashy special effect which player emerges from. This will
       hang around continuisly, so needs to be long-running cycling animation
     * Goal portal - some variation on the entry portal (we could just do
       this in code using the same SVG, adding color tints or different
       animation params)
     
-Convert SVG into bitmaps, stationary obstacles (bushes, walls, boulders)
-
 Render items in layers:
     0 weeds, flowers - things your tank drives over.
     1 tank images (previous player tanks.)
@@ -87,6 +81,9 @@ Get Harry to record some voiceover announcements
     Game Over
     5... 4... 3... 2... 1...
 
+Release brake after stopping and press it again to go into reverse,
+Reverse is half speed.
+
 Display congrats and score when game is completed 
 
 Score one for each item of progress towards the goal.
@@ -94,9 +91,9 @@ Score one for each item of progress towards the goal.
 
 Display the score.
 
+pressure pads have a different appearance when depressed
+
 modify tank handling to allow for slight skids
-Release brake after stopping and press it again to go into reverse,
-Reverse is half speed.
 
 Animate the tank treads
 
@@ -108,10 +105,10 @@ Leave tracks behind as you drive.
 
 Spurt out particle effect fountain of dirt behind you when accellerating.
 
-Fringing on the rotated sprites. Either color the transparent pixels around
-the edges of the bitmaps the same color as their opaque neighbours, or
-pre-process the images and use a different blend mode. See:
-http://tartley.com/?p=945
+Fringing is visible on the edges of the rotated sprites. Either color the
+transparent pixels around the edges of the bitmaps the same color as their
+opaque neighbours, or pre-process the images and use a different blend mode.
+See: http://tartley.com/?p=945
 
 
 Optional things to consider
@@ -144,4 +141,9 @@ Tank can be driven with keyboard
     forward motion in direction tank is facing
     cursors or WASD
     brake to rapidly slow to a stop
+
+Camera follows player's vehicle.
+
+new SVG: Stone pressure pads in the ground which the tank will drive on to
+activate.
 

@@ -9,13 +9,16 @@ from .path import DATA
 
 class GameItem(object):
 
-    def __init__(self, image_name, **kwargs):
+    image_name = None # needs overriding in derived classes
+    level = 0
+
+    def __init__(self, **kwargs):
         if 'x' not in kwargs:
             kwargs['x'] = uniform(-4000, 4000)
         if 'y' not in kwargs:
             kwargs['y'] = uniform(-4000, 4000)
         self.sprite = Sprite(
-            join(DATA, 'images', image_name),
+            join(DATA, 'images', self.image_name),
         )
         for name, value in kwargs.iteritems():
             setattr(self, name, value)
@@ -69,14 +72,4 @@ class GameItem(object):
     def __set_alpha(self, value):
         self.sprite.alpha = value
     alpha = property(__get_alpha, __set_alpha)
-
-
-class Greenery(GameItem):
-
-    def __init__(self, name, **kwargs):
-        if 'scale' not in kwargs:
-            kwargs['scale'] = uniform(0.5, 2)
-        if 'rot' not in kwargs:
-            kwargs['rot'] = uniform(0, 360)
-        GameItem.__init__(self, name, **kwargs)
 

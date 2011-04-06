@@ -7,7 +7,7 @@ import pyglet
 from .camera import Camera
 from .color import Color
 from .eventloop import Eventloop
-from .gameitem import Greenery
+from .greenery import Tree, Weed, Flower, Fronds
 from .options import Options
 from .render import Render
 from .tank import Tank
@@ -16,10 +16,10 @@ from .world import World
 
 def populate(world):
     for _ in xrange(200):
-        world.add( Greenery('bush.png', green=uniform(0.6, 1)) )
-        world.add( Greenery('weed.png', green=uniform(0.4, 0.7)) )
-        world.add( Greenery('flower.png', rot=uniform(-35, 5), scale=0.75) )
-        world.add( Greenery('fronds.png', green=uniform(0.5, 1)) )
+        world.add( Tree() )
+        world.add( Weed() )
+        world.add( Flower() )
+        world.add( Fronds() )
 
 
 class CameraMan(object):

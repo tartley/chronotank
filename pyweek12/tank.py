@@ -7,8 +7,11 @@ from .gameitem import GameItem
 
 class Tank(GameItem):
 
+    image_name = 'tank.png'
+    level = 2
+
     def __init__(self, **kwargs):
-        GameItem.__init__(self, 'tank.png', **kwargs)
+        GameItem.__init__(self, **kwargs)
         self.keystate = key.KeyStateHandler()
         self.speed = 0.0
 
