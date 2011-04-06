@@ -15,16 +15,11 @@ from .world import World
 
 
 def populate(world):
-    for _ in xrange(300):
+    for _ in xrange(200):
         world.add( Greenery('bush.png', green=uniform(0.6, 1)) )
         world.add( Greenery('weed.png', green=uniform(0.4, 0.7)) )
         world.add( Greenery('flower.png', rot=uniform(-35, 5), scale=0.75) )
-
-
-def add_player(world):
-    player = Tank(x=0, y=0)
-    world.add( player )
-    return player
+        world.add( Greenery('fronds.png', green=uniform(0.5, 1)) )
 
 
 class CameraMan(object):
@@ -47,8 +42,8 @@ class Application(object):
         self.world = World()
         self.world.background_color = Color(0.1, 0.3, 0)
         populate(self.world)
-        self.player = add_player(self.world)
-
+        self.player = Tank(x=0, y=0)
+        self.world.add( self.player )
         self.window = pyglet.window.Window(
             fullscreen=self.options.fullscreen,
             vsync=self.options.vsync,
