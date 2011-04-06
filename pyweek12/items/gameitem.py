@@ -4,7 +4,7 @@ from random import uniform
 
 from rabbyt.sprites import Sprite
 
-from .path import DATA
+from ..path import DATA
 
 
 class GameItem(object):

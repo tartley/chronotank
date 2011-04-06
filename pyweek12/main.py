@@ -7,10 +7,10 @@ from .camera import Camera
 from .cameraman import CameraMan
 from .color import Color
 from .eventloop import Eventloop
-from .greenery import Tree, Weed, Flower, Fronds
+from .items.greenery import Tree, Weed, Flower, Fronds
 from .options import Options
 from .render import Render
-from .tank import Tank
+from .items.tank import Tank
 from .world import World
 
 
