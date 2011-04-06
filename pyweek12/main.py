@@ -22,10 +22,7 @@ def populate(world):
 
 
 def add_player(world):
-    player = Tank(
-        x=0, y=0,
-        angular_velocity=20,
-    )
+    player = Tank(x=0, y=0)
     world.add( player )
     return player
 
@@ -46,11 +43,12 @@ class Application(object):
             resizable=True,
         )
         self.camera = Camera((0, 0), 800)
+        self.window.on_resize = self.camera.on_resize
 
         def make_follow_player(player):
-            def follow_player(item, time, dt):
-                item.x = player.x
-                item.y = player.y
+            def follow_player(cam):
+                cam.x = player.x
+                cam.y = player.y
             return follow_player
 
         self.camera.update = make_follow_player(self.player)
@@ -59,10 +57,11 @@ class Application(object):
         self.eventloop = Eventloop(
             self.window, self.world, self.render, self.options
         )
+
+    def run(self):
         self.eventloop.run(self.world.update)
 
 
 def main():
-    app = Application()
-    app.run()
+    Application().run()
     

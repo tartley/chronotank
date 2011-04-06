@@ -12,12 +12,6 @@ class Render(object):
         self.options = options
         self.clock_display = None
         rabbyt.set_default_attribs()
-        self.width, self.height = None, None
-
-    def on_resize(self, width, height):
-        gl.glViewport(0, 0, width, height)
-        self.width = width
-        self.height = height
 
     def clear_window(self, color):
         '''
@@ -32,30 +26,28 @@ class Render(object):
         '''
         Redraw the whole window
         '''
-        self.camera.update(self.camera, 0, 0)
+        self.camera.update(self.camera)
         self.clear_window(self.world.background_color)
-        self.camera.world_projection(self.width / self.height)
-        self.draw_world()
-        if self.options.fps:
-            if self.clock_display is None:
-                self.clock_display = clock.ClockDisplay()
-            self.draw_hud()
-
-
-    def draw_world(self):
+        self.camera.world_projection()
         for item in self.world:
             item.sprite.render()
+
+        self.draw_hud()
+
 
 
     def draw_hud(self):
         '''
         Draw any display items overlaid on the world, such as FPS counter
         '''
-        self.camera.hud_projection((self.width, self.height))
+        self.camera.hud_projection()
         gl.glEnableClientState(gl.GL_VERTEX_ARRAY)
         gl.glEnableClientState(gl.GL_COLOR_ARRAY)
 
-        self.clock_display.draw()
+        if self.options.fps:
+            if self.clock_display is None:
+                self.clock_display = clock.ClockDisplay()
+            self.clock_display.draw()
 
         gl.glDisableClientState(gl.GL_VERTEX_ARRAY)
         gl.glDisableClientState(gl.GL_COLOR_ARRAY)
