@@ -15,10 +15,14 @@ class Render(object):
         
         # lists of sprites to render, keyed by layer
         self.sprites = {}
-        world.item_added += self.on_item_added
-        world.item_removed += self.on_item_removed
+
+        # populate self.sprites with all of world's current items
         for item in world:
             self.on_item_added(item)
+
+        # keep self.sprites up-to-date as items added to and removed from world
+        world.item_added += self.on_item_added
+        world.item_removed += self.on_item_removed
 
 
     def on_item_added(self, item):
@@ -45,6 +49,7 @@ class Render(object):
         self.clear_window(self.world.background_color)
         self.camera.world_projection()
 
+        # draw all entries in self.sprites
         for layer in sorted(self.sprites.iterkeys()):
             rabbyt.render_unsorted( self.sprites[layer] )
 

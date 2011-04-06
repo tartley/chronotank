@@ -1,10 +1,10 @@
 
 import sys
-from random import uniform
 
 import pyglet
 
 from .camera import Camera
+from .cameraman import CameraMan
 from .color import Color
 from .eventloop import Eventloop
 from .greenery import Tree, Weed, Flower, Fronds
@@ -20,19 +20,6 @@ def populate(world):
         world.add( Weed() )
         world.add( Flower() )
         world.add( Fronds() )
-
-
-class CameraMan(object):
-
-    def __init__(self, camera, get_follow):
-        self.camera = camera
-        self.get_follow = get_follow
-
-    def update(self, _, __):
-        follow = self.get_follow()
-        if follow is not None:
-            self.camera.x = follow.x
-            self.camera.y = follow.y
 
 
 class Application(object):
