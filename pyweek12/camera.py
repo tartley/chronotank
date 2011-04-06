@@ -2,7 +2,7 @@ from __future__ import division
 from math import sin, cos
 
 from pyglet.gl import (
-    glLoadIdentity, glMatrixMode,
+    glLoadIdentity, glMatrixMode, glViewport,
     gluLookAt, gluOrtho2D,
     GL_MODELVIEW, GL_PROJECTION,
 )
@@ -10,7 +10,7 @@ from pyglet.gl import (
 
 class Camera(object):
     """
-    Camera tracks a position, orientation and zoom level, and applies openGL
+    Camera tracks a position, scale and angle, and applies openGL
     transforms so that subsequent renders are drawn at the correct place, size
     and orientation on screen
     """
@@ -18,17 +18,26 @@ class Camera(object):
         self.x, self.y = offset
         self.scale = scale
         self.angle = angle
+        
+        self.width = None
+        self.height = None
 
 
-    def world_projection(self, aspect):
+    def on_resize(self, width, height):
+        glViewport(0, 0, width, height)
+        self.width = width
+        self.height = height
+
+
+    def world_projection(self):
         """
-        Given aspect, ratio of screen width / height,
         Sets OpenGL projection and modelview matrices such that the window
-        is centered on self.(x,y), shows at least scale world units in every
+        is centered on self.(x,y), shows at least 'scale' world units in every
         direction, and is oriented by angle.
         """
         left = bottom = -self.scale
         right = top = self.scale
+        aspect = self.width / self.height
         if aspect >= 1:
             # landscape
             left *= aspect
@@ -49,7 +58,7 @@ class Camera(object):
             sin(self.angle), cos(self.angle), 0.0)
 
 
-    def hud_projection(self, size):
+    def hud_projection(self):
         """
         Sets OpenGL pojection and modelview matrices such that the window
         renders (0,0) to (size.x, size,y)
@@ -59,5 +68,5 @@ class Camera(object):
 
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-        gluOrtho2D(0, size[0], 0, size[1])
+        gluOrtho2D(0, self.width, 0, self.height)
 

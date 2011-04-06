@@ -30,7 +30,6 @@ class Eventloop(object):
 
         self.window.on_draw = on_draw
         self.window.on_key_press = self.on_key_press
-        self.window.on_resize = render.on_resize
 
         # if any items already in the world have key state handlers, then
         # bind the window key events to them
