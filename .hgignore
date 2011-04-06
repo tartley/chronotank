@@ -1,2 +1,9 @@
 MANIFEST.in
+Lib/*
+scripts/deactivate*
+scripts/activate*
+scripts/easy_install*
+scripts/pip*
+scripts/pyrexc*
+scripts/python*
 
