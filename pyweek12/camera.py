@@ -10,7 +10,7 @@ from pyglet.gl import (
 
 class Camera(object):
     """
-    Camera tracks a position, orientation and zoom level, and applies openGL
+    Camera tracks a position, scale and angle, and applies openGL
     transforms so that subsequent renders are drawn at the correct place, size
     and orientation on screen
     """
