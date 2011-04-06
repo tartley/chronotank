@@ -6,7 +6,10 @@ run_game.py
 
 A game for PyWeek 12
 
-KEYBOARD: Left, Right, Up
+KEYBOARD:
+    Up: accellerate
+    Down: brake and reverse
+    Left, Right: steer
 MOUSE: 
 JOYSTICK: 
 

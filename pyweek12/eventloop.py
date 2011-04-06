@@ -10,12 +10,7 @@ from .screenshot import screenshot
 
 class Eventloop(object):
     '''
-    .. function:: __init__(options)
-
-    Initialise EventLoop. Must be called before calling :func:`run` to start
-    the event loop. You may pass in a pyglet.window.Window instance, or
-    if it is None, we will create a (non-visible) one, using self.options
-    to determine its parameters.
+    .. function:: __init__(window, world, render, options)
     '''
     def __init__(self, window, world, render, options):
         self.window = window
@@ -65,7 +60,7 @@ class Eventloop(object):
 
     def on_key_press(self, symbol, modifiers):
         '''
-        Handle key presses:
+        Application-wide key handler, always on.
 
         ========= ==================
         escape    quit

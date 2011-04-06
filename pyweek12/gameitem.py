@@ -11,9 +11,9 @@ class GameItem(object):
 
     def __init__(self, image_name, **kwargs):
         if 'x' not in kwargs:
-            kwargs['x'] = uniform(-2000, 2000)
+            kwargs['x'] = uniform(-4000, 4000)
         if 'y' not in kwargs:
-            kwargs['y'] = uniform(-2000, 2000)
+            kwargs['y'] = uniform(-4000, 4000)
         self.sprite = Sprite(
             join(DATA, 'images', image_name),
         )

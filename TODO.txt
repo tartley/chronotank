@@ -104,6 +104,11 @@ Leave tracks behind as you drive.
 
 Spurt out particle effect fountain of dirt behind you when accellerating.
 
+Fringing on the rotated sprites. Either color the transparent pixels around
+the edges of the bitmaps the same color as their opaque neighbours, or
+pre-process the images and use a different blend mode. See:
+http://tartley.com/?p=945
+
 
 Optional things to consider
 ---------------------------

@@ -15,7 +15,7 @@ from .world import World
 
 
 def populate(world):
-    for _ in xrange(100):
+    for _ in xrange(300):
         world.add( Greenery('bush.png', green=uniform(0.6, 1)) )
         world.add( Greenery('weed.png', green=uniform(0.4, 0.7)) )
         world.add( Greenery('flower.png', rot=uniform(-35, 5), scale=0.75) )
@@ -25,6 +25,19 @@ def add_player(world):
     player = Tank(x=0, y=0)
     world.add( player )
     return player
+
+
+class CameraMan(object):
+
+    def __init__(self, camera, get_follow):
+        self.camera = camera
+        self.get_follow = get_follow
+
+    def update(self, _, __):
+        follow = self.get_follow()
+        if follow is not None:
+            self.camera.x = follow.x
+            self.camera.y = follow.y
 
 
 class Application(object):
@@ -44,15 +57,8 @@ class Application(object):
         )
         self.camera = Camera((0, 0), 800)
         self.window.on_resize = self.camera.on_resize
-
-        def make_follow_player(player):
-            def follow_player(cam):
-                cam.x = player.x
-                cam.y = player.y
-            return follow_player
-
-        self.camera.update = make_follow_player(self.player)
-
+        self.camera_man = CameraMan(self.camera, lambda: self.player)
+        self.world.add(self.camera_man)
         self.render = Render(self.world, self.camera, self.options)
         self.eventloop = Eventloop(
             self.window, self.world, self.render, self.options

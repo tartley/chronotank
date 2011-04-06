@@ -13,6 +13,7 @@ class Render(object):
         self.clock_display = None
         rabbyt.set_default_attribs()
 
+
     def clear_window(self, color):
         '''
         Clear window color and depth buffers, using the given color
@@ -26,14 +27,13 @@ class Render(object):
         '''
         Redraw the whole window
         '''
-        self.camera.update(self.camera)
         self.clear_window(self.world.background_color)
         self.camera.world_projection()
         for item in self.world:
-            item.sprite.render()
+            if hasattr(item, 'sprite'):
+                item.sprite.render()
 
         self.draw_hud()
-
 
 
     def draw_hud(self):
