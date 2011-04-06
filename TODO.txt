@@ -4,10 +4,14 @@ Camera follows player's vehicle.
 
 Sound effects:
     Engine noises - revs higher/faster as you accelerate.
-    Chronostatic as you emerge from the entry portal
+    Static noise for the entry portal
+    'Pop' as you emerge from the entry portal
     'clang' on fast collision with rocks and walls
+    slight click as stone pressure plates are depressed
+    rumble of large heavy stone doors opening
     pleasant flourish for point being scored
     Slight squeak for brakes being applied
+
 
 More SVG required:
     * Boulders and rocky outcrops (circular collision boundaries, or collection
