@@ -8,6 +8,7 @@ from .cameraman import CameraMan
 from .color import Color
 from .eventloop import Eventloop
 from .items.greenery import Tree, Weed, Flower, Fronds
+from .items.portals import EntryPortal
 from .options import Options
 from .render import Render
 from .items.tank import Tank
@@ -20,6 +21,7 @@ def populate(world):
         world.add( Weed() )
         world.add( Flower() )
         world.add( Fronds() )
+    world.add( EntryPortal(0, 0) )
 
 
 class Application(object):

@@ -13,10 +13,6 @@ class GameItem(object):
     layer = 0
 
     def __init__(self, **kwargs):
-        if 'x' not in kwargs:
-            kwargs['x'] = uniform(-4000, 4000)
-        if 'y' not in kwargs:
-            kwargs['y'] = uniform(-4000, 4000)
         self.sprite = Sprite(
             join(DATA, 'images', self.image_name),
         )
