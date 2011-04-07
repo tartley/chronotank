@@ -11,9 +11,9 @@ class Tank(GameItem):
     layer = 2
 
     def __init__(self, **kwargs):
-        GameItem.__init__(self, **kwargs)
         self.keystate = key.KeyStateHandler()
         self.speed = 0.0
+        GameItem.__init__(self, **kwargs)
 
     def update(self, time, dt):
 

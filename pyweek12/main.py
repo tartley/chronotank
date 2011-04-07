@@ -31,7 +31,7 @@ class Application(object):
         self.world = World()
         self.world.background_color = Color(0.1, 0.3, 0)
         populate(self.world)
-        self.player = Tank(x=0, y=0)
+        self.player = Tank(x=0, y=0, speed=8)
         self.world.add( self.player )
         self.window = pyglet.window.Window(
             fullscreen=self.options.fullscreen,
