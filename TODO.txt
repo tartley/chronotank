@@ -1,4 +1,7 @@
-Design levels and player interactions (e.g. place doors and switches)
+Start with 'Any Key' hud item. See SinisterDucks
+
+Design levels and player interactions (e.g. draw out the placement of doors
+and switches)
 
 Sound effects:
     * Engine noises - revs higher/faster as you accelerate.

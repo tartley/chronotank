@@ -22,7 +22,7 @@ def populate(world):
         world.add( Flower() )
         world.add( Fronds() )
     world.add( EntryPortal(0, 0) )
-
+    
 
 class Application(object):
 
@@ -31,17 +31,16 @@ class Application(object):
         self.world = World()
         self.world.background_color = Color(0.1, 0.3, 0)
         populate(self.world)
-        self.player = Tank(x=0, y=0, speed=8)
-        self.world.add( self.player )
+        #self.world.add( Tank(x=0, y=0, speed=8) )
         self.window = pyglet.window.Window(
             fullscreen=self.options.fullscreen,
             vsync=self.options.vsync,
             visible=False,
             resizable=True,
         )
-        self.camera = Camera((0, 0), 800)
+        self.camera = Camera((0, 0), 16)
         self.window.on_resize = self.camera.on_resize
-        self.camera_man = CameraMan(self.camera, lambda: self.player)
+        self.camera_man = CameraMan(self.camera, lambda: self.world.entryportal)
         self.world.add(self.camera_man)
         self.render = Render(self.world, self.camera, self.options)
         self.eventloop = Eventloop(

@@ -1,6 +1,8 @@
 
 from .color import Color
 from .event import Event
+from .items.tank import Tank
+from .items.portals import EntryPortal
 
 class World(object):
     '''
@@ -43,18 +45,33 @@ class World(object):
         add given item to the world. If position is not given, the item's
         existing position attribute is used.
 
+        if item is one of a few special types (e.g. Tank, EntryPortal) then
+        populate attributes to remember which item it is (e.g. self.player,
+        self.entryportal)
+
         Fires the self.item_added event.
         '''
         self.items[id(item)] = item
+        if isinstance(item, Tank):
+            self.player = item
+        if isinstance(item, EntryPortal):
+            self.entryportal = item
         self.item_added.fire(item)
 
     def remove(self, item):
         '''
         remove the given item from the world.
 
+        if item is one of our special item attributes (e.g. item.player,
+        item.entryportal) then set that attribute to None.
+
         Fires the self.item_removed event.
         '''
         del self.items[id(item)]
+        if item is self.player:
+            self.player = None
+        if item is self.entryportal:
+            self.entryportal = None
         self.item_removed.fire(item)
         item.position = None
 

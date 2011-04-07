@@ -14,5 +14,5 @@ class EntryPortal(GameItem):
 
     def update(self, time, dt):
         self.rot = uniform(0, 360)
-        self.scale = uniform(1, 2)
+        self.scale = 1
 
