@@ -11,6 +11,9 @@ class Keyboard(object):
         self.world = world
         self.options = options
 
+        self.keystate = key.KeyStateHandler()
+        window.push_handlers(self.keystate)
+
         self.window.on_key_press = self.on_key_press
 
         # if any items already in the world have key state handlers, then
@@ -23,14 +26,14 @@ class Keyboard(object):
 
     def on_item_added(self, item):
         if hasattr(item, 'keystate'):
-            self.window.push_handlers(item.keystate)
+            item.keystate = self.keystate
         #  not tested this, but expect it will be reqd:
         #if hasattr(item, 'on_key_press'):
             #window.push_handler(item.on_key_press)
 
     def on_item_removed(self, item):
         if hasattr(item, 'keystate'):
-            self.window.remove_handlers(item.keystate)
+            item.keystate = None
 
 
     def on_key_press(self, symbol, modifiers):

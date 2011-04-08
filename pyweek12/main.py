@@ -51,24 +51,36 @@ class Application(object):
         )
         self.keyboard = Keyboard(self.window, self.world, self.options)
 
-
-        def insert_player(_):
-            self.world.add( Tank(x=0, y=0, speed=8) )
-            self.cameraman.get_follow = lambda: self.world.player
-            pyglet.clock.schedule_once(insert_player, 4)
-
-
-        def start_game(dt):
-            self.cameraman.scale = 800
-            pyglet.clock.schedule_once(insert_player, 1.5)
-
-        pyglet.clock.schedule_once( start_game, 2)
-
-
     def run(self):
         self.eventloop.run(self.world.update)
 
 
+class Game(Application):
+
+    def __init__(self):
+        Application.__init__(self)
+        self.lives = 9
+        pyglet.clock.schedule_once( self.start, 2)
+
+    def start(self, dt):
+        self.cameraman.scale = 800
+
+        def insert_player(_):
+            if self.lives > 0:
+                player = Tank(x=0, y=0, speed=8)
+                self.world.add(player)
+                self.lives -= 1
+                if self.lives > 0:
+                    pyglet.clock.schedule_once(insert_player, 4)
+                return player
+
+        def insert_first_player(_):
+            player = insert_player(None)
+            self.cameraman.get_follow = lambda: player
+
+        pyglet.clock.schedule_once(insert_first_player, 1.5)
+
+
 def main():
-    Application().run()
+    Game().run()
     
