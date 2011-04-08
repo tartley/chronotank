@@ -1,6 +1,5 @@
 
 from os.path import join
-from random import uniform
 
 from rabbyt.sprites import Sprite
 
@@ -13,9 +12,10 @@ class GameItem(object):
     layer = 0
 
     def __init__(self, **kwargs):
-        self.sprite = Sprite(
-            join(DATA, 'images', self.image_name),
-        )
+        if self.image_name:
+            self.sprite = Sprite(
+                join(DATA, 'images', self.image_name),
+            )
         for name, value in kwargs.iteritems():
             setattr(self, name, value)
 

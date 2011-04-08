@@ -10,14 +10,14 @@ from pyglet.gl import (
 
 class Camera(object):
     """
-    Camera tracks a position, scale and angle, and applies openGL
+    Camera tracks a position, scale and rot, and applies openGL
     transforms so that subsequent renders are drawn at the correct place, size
     and orientation on screen
     """
-    def __init__(self, offset, scale, angle=0.0):
+    def __init__(self, offset, scale=1000, rot=0.0):
         self.x, self.y = offset
         self.scale = scale
-        self.angle = angle
+        self.rot = rot
         
         self.width = None
         self.height = None
@@ -33,7 +33,7 @@ class Camera(object):
         """
         Sets OpenGL projection and modelview matrices such that the window
         is centered on self.(x,y), shows at least 'scale' world units in every
-        direction, and is oriented by angle.
+        direction, and is oriented by rot.
         """
         left = bottom = -self.scale
         right = top = self.scale
@@ -55,7 +55,7 @@ class Camera(object):
         gluLookAt(
             self.x, self.y, +1.0,
             self.x, self.y, -1.0,
-            sin(self.angle), cos(self.angle), 0.0)
+            sin(self.rot), cos(self.rot), 0.0)
 
 
     def hud_projection(self):
