@@ -1,4 +1,10 @@
-Start with 'Any Key' hud item. See SinisterDucks
+Start with 'Press Any Key' hud item. 
+
+display the entry portal (start location for all lives) as a special effect.
+A scramble of chrono-static, obviously.
+
+Player emerges from entry portal at full speed, and coasts to a stop if no
+controls are pressed.
 
 Design levels and player interactions (e.g. draw out the placement of doors
 and switches)
@@ -25,6 +31,14 @@ More SVG required:
       this in code using the same SVG, adding color tints or different
       animation params)
 
+Get Harry to record some voiceover announcements
+    Welcome
+    Chronotank
+    Game Over
+    Warning
+    Temporal stability breached!
+    5... 4... 3... 2... 1...
+   
 Use Rabbyt collision detection to see whether the player is colliding with
 anything. See advice at:
 http://groups.google.com/group/rabbyt/browse_frm/thread/9da3abc732599b76
@@ -38,40 +52,21 @@ Add a 'player echo', which replays the player's movements
 One new echo for each countdown
 
 Nine lives exactly.
+Display remaining lives on the HUD
+Game over after using ninth life
 
-Start point is some sort of funky 'exit from the time machine' special effect
+Add pressure switches and doors.
+
+Sitting on a pressure switch opens a door.
+
+Several pressure switches may be required to open a single door.
 
 Add a 'goal portal' gameitem: any player image colliding with this successfully
 completes the game
 
-Add force fields.
-
-Add pressure switches. Sitting on one disables a forcefield.
-
+Goal portal only appears after completing final task in the level.
 Populate the word to create the layout of the level at game start.
     - do we load levels from disk? Can we make an in-game level editor?
-
-Several pressure switches may be required to deactivate a single forcefield.
-
-Goal portal only appears after completing all tasks in the level.
-
-Display remaining lives on the HUD
-
-Game over after using ninth life
-
-display the entry portal (start location for all lives) as a special effect.
-A scramble of chrono-static, obviously.
-
-Player emerges from entry portal at full speed, and coasts to a stop if no
-controls are pressed.
-
-Get Harry to record some voiceover announcements
-    Welcome
-    Chronotank
-    Game Over
-    Warning
-    Temporal stability breach!
-    5... 4... 3... 2... 1...
 
 Release brake after stopping and press it again to go into reverse,
 Reverse is half speed.
@@ -102,7 +97,29 @@ transparent pixels around the edges of the bitmaps the same color as their
 opaque neighbours, or pre-process the images and use a different blend mode.
 See: http://tartley.com/?p=945
 
-Make trees and bushes wobble and rotate as tank brushes past them
+Make trees and bushes wobble and rotate as tank brushes past them:
+
+    add a Rabbyt "lerp" to the tree sprite's position, to make the tree wobble
+    back and forth in the direction of the tank's movement - as though the tank
+    was brushing by the tree, pushing it aside instead of knocking it down. The
+    position offset can then oscillate, damping quickly back to zero. Making
+    the oscilation damp down might be tricky. Perhaps schedule Pyglet events to
+    update the lerp parameters after enough time has passed for one complete
+    oscillation? This might cause visual discontinuities in the wobble
+    velocity, but would be much faster to execute than setting the tree
+    position manually yourself every frame. (applying a lerp to a sprite
+    attribute is C magic.)
+
+    Also, if a tree is off-centre from the tank's path, you could use a lerp on
+    the tree's sprite's .rot attribute, so that the tree rotates. The rotation
+    could also oscillate, so long as it starts in the correct direction. (e.g.
+    clockwise for a tank heading upwards on the left side of the tree) 
+
+Performance:
+  * Pyglet sprites in a batch are faster than rabbyt sprites, unless
+    they are moving. Use pyglet for immobile sprites.
+  * Don't render everything all the time - break world town into tiles,
+    only draw the 4 tiles that overlap the screen.
 
 test py2exe
 
