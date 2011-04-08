@@ -25,7 +25,6 @@ def populate(world):
         world.add( Fronds() )
     world.add( EntryPortal(0, 0) )
     
-
 class Application(object):
 
     def __init__(self):
@@ -52,13 +51,17 @@ class Application(object):
         )
         self.keyboard = Keyboard(self.window, self.world, self.options)
 
+
         def insert_player(_):
             self.world.add( Tank(x=0, y=0, speed=8) )
             self.cameraman.get_follow = lambda: self.world.player
+            pyglet.clock.schedule_once(insert_player, 4)
+
 
         def start_game(dt):
             self.cameraman.scale = 800
-            pyglet.clock.schedule_once(insert_player, 2)
+            pyglet.clock.schedule_once(insert_player, 1.5)
+
         pyglet.clock.schedule_once( start_game, 2)
 
 

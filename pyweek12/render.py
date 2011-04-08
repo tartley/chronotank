@@ -14,12 +14,16 @@ class Render(object):
         rabbyt.set_default_attribs()
         
         # lists of sprites to render, keyed by layer
+        # 0: ground level
+        # 1: old images of player
+        # 2: player
+        # 3: treetops
+        # 4: hud
         self.sprites = {}
-
+        
         # populate self.sprites with all of world's current items
         for item in world:
             self.on_item_added(item)
-
         # keep self.sprites up-to-date as items added to and removed from world
         world.item_added += self.on_item_added
         world.item_removed += self.on_item_removed
@@ -32,6 +36,7 @@ class Render(object):
     def on_item_removed(self, item):
         if hasattr(item, 'sprite'):
             self.sprites[item.layer].remove(item.sprite)
+
 
     def clear_window(self, color):
         '''
@@ -51,18 +56,23 @@ class Render(object):
 
         # draw all entries in self.sprites
         for layer in sorted(self.sprites.iterkeys()):
+            # dont render hud items
+            if layer == 4:
+                continue
             rabbyt.render_unsorted( self.sprites[layer] )
 
-        self.draw_hud()
+        self.draw_hud(self.sprites.get(4, []))
 
 
-    def draw_hud(self):
+    def draw_hud(self, items):
         '''
         Draw any display items overlaid on the world, such as FPS counter
         '''
         self.camera.hud_projection()
         gl.glEnableClientState(gl.GL_VERTEX_ARRAY)
         gl.glEnableClientState(gl.GL_COLOR_ARRAY)
+
+        rabbyt.render_unsorted( items )
 
         if self.options.fps:
             if self.clock_display is None:
