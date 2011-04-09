@@ -12,7 +12,7 @@ class EntryPortal(GameItem):
         self.x = x
         self.y = y
 
-    def update(self, time, dt):
+    def update(self, dt):
         self.rot = uniform(0, 360)
         self.scale = 1
 

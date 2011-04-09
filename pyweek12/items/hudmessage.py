@@ -48,7 +48,7 @@ class TimeMessage(GameItem):
         else:
             self.time = time
 
-    def update(self, age, dt):
+    def update(self, dt):
         self.time -= dt
         self.sprite.set_text('%.1f' % (self.time,))
         self.sprite.x = self.window_width - 50 - self.sprite._text.width

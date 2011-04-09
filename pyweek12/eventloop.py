@@ -6,14 +6,14 @@ from pyglet.event import EVENT_HANDLED
 
 class Eventloop(object):
     '''
-    .. function:: __init__(window, world, render, options)
+    .. function:: __init__(window, world, render, options, app_update)
     '''
-    def __init__(self, window, world, render, options):
+    def __init__(self, window, world, render, options, app_update):
         self.window = window
         self.world = world
         self.render = render
         self.options = options
-
+        self.app_update = app_update
 
     def run(self, update):
         '''
@@ -37,10 +37,12 @@ class Eventloop(object):
             self.window.close()
 
 
-    def update(self, dt):
+    def update(self, raw_dt):
         '''
         Called before every screen refresh,
         '''
-        self.world.update_all(min(dt, 1 / 30.0))
+        dt = min(raw_dt, 1 / 30.0)
+        self.app_update(dt)
+        self.world.update_all(dt)
         self.window.invalid = True
 

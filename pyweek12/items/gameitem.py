@@ -11,6 +11,7 @@ class GameItem(object):
 
     image_name = None # needs overriding in derived classes
     layer = 0
+    collide = False
 
     def __init__(self, **kwargs):
         if self.image_name:
