@@ -8,7 +8,7 @@ from .cameraman import CameraMan
 from .color import Color
 from .eventloop import Eventloop
 from .items.greenery import Tree, Weed, Flower, Fronds
-from .items.hudmessage import HudMessage
+from .items.hudmessage import LivesMessage, TimeMessage
 from .items.portals import EntryPortal
 from .items.tank import Tank
 from .keyboard import Keyboard
@@ -32,7 +32,6 @@ class Application(object):
         self.world = World()
         self.world.background_color = Color(0.1, 0.3, 0)
         populate(self.world)
-        #self.world.add( HudMessage('Any Key', xy=(320,240)) )
         self.window = pyglet.window.Window(
             fullscreen=self.options.fullscreen,
             vsync=self.options.vsync,
@@ -64,12 +63,15 @@ class Game(Application):
 
     def start(self, dt):
         self.cameraman.scale = 800
-
+        lives_hud = LivesMessage(9)
+        time_hud = TimeMessage(4, self.window.width)
         def insert_player(_):
             if self.lives > 0:
                 player = Tank(x=0, y=0, speed=8)
                 self.world.add(player)
+                time_hud.set_time(4)
                 self.lives -= 1
+                lives_hud.update_lives(self.lives)
                 if self.lives > 0:
                     pyglet.clock.schedule_once(insert_player, 4)
                 return player
@@ -77,6 +79,8 @@ class Game(Application):
         def insert_first_player(_):
             player = insert_player(None)
             self.cameraman.get_follow = lambda: player
+            self.world.add(lives_hud)
+            self.world.add(time_hud)
 
         pyglet.clock.schedule_once(insert_first_player, 1.5)
 
