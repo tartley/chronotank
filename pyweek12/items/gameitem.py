@@ -71,6 +71,30 @@ class GameItem(object):
         self.sprite.alpha = value
     alpha = property(__get_alpha, __set_alpha)
 
+    def __get_left(self):
+        return self.sprite.left
+    def __set_left(self, value):
+        self.sprite.left = value
+    left = property(__get_left, __set_left)
+
+    def __get_right(self):
+        return self.sprite.right
+    def __set_right(self, value):
+        self.sprite.right = value
+    right = property(__get_right, __set_right)
+
+    def __get_top(self):
+        return self.sprite.top
+    def __set_top(self, value):
+        self.sprite.top = value
+    top = property(__get_top, __set_top)
+
+    def __get_bottom(self):
+        return self.sprite.bottom
+    def __set_bottom(self, value):
+        self.sprite.bottom = value
+    bottom = property(__get_bottom, __set_bottom)
+
 
     def randomise_position(self, exclude_radius=0):
         while (self.x*self.x + self.y*self.y) <= exclude_radius**2:
