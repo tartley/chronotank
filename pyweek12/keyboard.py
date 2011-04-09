@@ -16,10 +16,6 @@ class Keyboard(object):
 
         self.window.on_key_press = self.on_key_press
 
-        # if any items already in the world have key state handlers, then
-        # bind the window key events to them
-        for item in world:
-            self.on_item_added(item)
         self.world.item_added += self.on_item_added
         self.world.item_removed += self.on_item_removed
 
@@ -27,7 +23,8 @@ class Keyboard(object):
     def on_item_added(self, item):
         if hasattr(item, 'keystate'):
             item.keystate = self.keystate
-        #  not tested this, but expect it will be reqd:
+        #  expect this will be required if gameitems start having their own
+        #  on_key_press handlers. Also will need removing in on_item_removed
         #if hasattr(item, 'on_key_press'):
             #window.push_handler(item.on_key_press)
 

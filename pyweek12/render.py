@@ -20,11 +20,6 @@ class Render(object):
         # 3: treetops
         # 4: hud
         self.sprites = {}
-        
-        # populate self.sprites with all of world's current items
-        for item in world:
-            self.on_item_added(item)
-        # keep self.sprites up-to-date as items added to and removed from world
         world.item_added += self.on_item_added
         world.item_removed += self.on_item_removed
 
