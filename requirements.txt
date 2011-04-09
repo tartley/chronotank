@@ -1,0 +1,4 @@
+distribute==0.6.15
+pyglet==1.1.4
+Pyrex==0.9.8.6
+Rabbyt==0.8.3
