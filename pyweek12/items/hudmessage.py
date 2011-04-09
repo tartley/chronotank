@@ -1,4 +1,5 @@
 from pyglet import font
+from pyglet.gl import glColor4f
 import rabbyt
 
 from .gameitem import GameItem
@@ -7,16 +8,20 @@ font.add_directory('pyweek12/data')
 default_font = font.load('Computerfont', 48)
 
 class SpriteText(rabbyt.BaseSprite):
-    def __init__(self, text, fnt=default_font, **kwargs):
+    def __init__(self, text, fnt=default_font, color=(1, 0.54, 0, 1), **kwargs):
         rabbyt.BaseSprite.__init__(self, **kwargs)
-        self._text = font.Text(fnt, text)
+        self.fnt = fnt
+        self.color = color
+        self.set_text(text)
 
     def set_text(self, text):
-        self._text.text = text
+        self.text = text
+        glyphs = self.fnt.get_glyphs(text)
+        self.glyph_string = font.GlyphString(text, glyphs)
 
     def render_after_transform(self):
-        self._text.color = self.rgba
-        self._text.draw()
+        glColor4f(*self.color)
+        self.glyph_string.draw()
 
 
 class LivesMessage(GameItem):
@@ -43,15 +48,13 @@ class TimeMessage(GameItem):
         GameItem.__init__(self)
         
     def set_time(self, time):
-        if time < 0:
-            self.time = 0
-        else:
-            self.time = time
+        self.time = time
 
     def update(self, dt):
         self.time -= dt
-        self.sprite.set_text('%.1f' % (self.time,))
-        self.sprite.x = self.window_width - 50 - self.sprite._text.width
+        self.sprite.set_text('%1.1f' % (max(self.time, 0),))
+        self.sprite.x = (self.window_width - 200 + (
+                60 - self.sprite.glyph_string.get_subwidth(0, 1)))
     
 
 class MainMenu(GameItem):
