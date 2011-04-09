@@ -3,8 +3,8 @@ import rabbyt
 
 from .gameitem import GameItem
 
-
-default_font = font.load('Arial', 24)
+font.add_directory('pyweek12/data')
+default_font = font.load('Computerfont', 24)
 
 class SpriteText(rabbyt.BaseSprite):
     def __init__(self, text, fnt=default_font, **kwargs):

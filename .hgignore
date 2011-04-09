@@ -7,3 +7,5 @@ scripts/pip*
 scripts/pyrexc*
 scripts/python*
 
+syntax: glob
+*.pyc
