@@ -4,7 +4,7 @@ import rabbyt
 from .gameitem import GameItem
 
 font.add_directory('pyweek12/data')
-default_font = font.load('Computerfont', 24)
+default_font = font.load('Computerfont', 48)
 
 class SpriteText(rabbyt.BaseSprite):
     def __init__(self, text, fnt=default_font, **kwargs):
@@ -19,14 +19,40 @@ class SpriteText(rabbyt.BaseSprite):
         self._text.draw()
 
 
-class HudMessage(GameItem):
+class LivesMessage(GameItem):
 
     layer = 4
 
-    def __init__(self, text, *args, **kwargs):
-        self.sprite = SpriteText(text, *args, **kwargs)
-        GameItem.__init__(self, *args, **kwargs)
+    def __init__(self, lives):
+        self.sprite = SpriteText('', xy=(50,50))
+        GameItem.__init__(self)
+        self.update_lives(lives)
+        
+    def update_lives(self, lives):
+        self.sprite.set_text('Tanks: %s' % (lives,))
 
+
+class TimeMessage(GameItem):
+
+    layer = 4
+
+    def __init__(self, time, window_width):
+        self.sprite = SpriteText('', xy=(300,50))
+        self.time = time
+        self.window_width = window_width
+        GameItem.__init__(self)
+        
+    def set_time(self, time):
+        if time < 0:
+            self.time = 0
+        else:
+            self.time = time
+
+    def update(self, age, dt):
+        self.time -= dt
+        self.sprite.set_text('%.1f' % (self.time,))
+        self.sprite.x = self.window_width - 50 - self.sprite._text.width
+    
 
 class MainMenu(GameItem):
     pass
