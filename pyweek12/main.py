@@ -5,6 +5,7 @@ import pyglet
 
 from .camera import Camera
 from .cameraman import CameraMan
+from .collide import Collide
 from .color import Color
 from .eventloop import Eventloop
 from .items.greenery import Tree, Weed, Flower, Fronds
@@ -25,14 +26,15 @@ def populate(world):
         world.add( Flower() )
         world.add( Fronds() )
         world.add( Wall() )
-
     world.add( EntryPortal(0, 0) )
+
     
 class Application(object):
 
     def __init__(self):
         self.options = Options(sys.argv)
         self.world = World()
+        self.collide = Collide(self.world)
         self.world.background_color = Color(0.1, 0.3, 0)
         populate(self.world)
         self.window = pyglet.window.Window(
@@ -44,13 +46,14 @@ class Application(object):
         self.camera = Camera((0, 0), scale=16)
         self.window.on_resize = self.camera.on_resize
         self.cameraman = CameraMan( self.camera )
-        self.world.add(self.cameraman)
         self.render = Render(self.world, self.camera, self.options)
-
         self.eventloop = Eventloop(
-            self.window, self.world, self.render, self.options
+            self.window, self.world, self.render, self.options, self.update
         )
         self.keyboard = Keyboard(self.window, self.world, self.options)
+
+    def update(self, dt):
+        self.cameraman.update(dt)
 
     def run(self):
         self.eventloop.run(self.world.update)

@@ -15,7 +15,7 @@ class Tank(GameItem):
         self.speed = 0.0
         GameItem.__init__(self, **kwargs)
 
-    def update(self, time, dt):
+    def update(self, dt):
         if self.keystate[key.UP] or self.keystate[key.W]:
             self.speed += 0.5
         elif self.keystate[key.DOWN] or self.keystate[key.S]:

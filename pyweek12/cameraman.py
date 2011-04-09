@@ -13,7 +13,7 @@ class CameraMan(object):
             rot = camera.rot
         self.rot = rot
 
-    def update(self, _, dt):
+    def update(self, dt):
         if self.get_follow:
             follow = self.get_follow()
             if follow is not None:

@@ -31,7 +31,6 @@ class World(object):
         self.item_added = Event()
         self.item_removed = Event()
         self.update = Event()
-        self.age = 0.0
         self.background_color = Color.Orange
 
     def __iter__(self):
@@ -77,9 +76,8 @@ class World(object):
 
         Fires the self.update event.
         '''
-        self.age += dt
-        self.update.fire(self.age, dt)
+        self.update.fire(dt)
         for item in self:
             if hasattr(item, 'update'):
-                item.update(self.age, dt)
+                item.update(dt)
 
