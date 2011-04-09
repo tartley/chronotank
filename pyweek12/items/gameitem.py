@@ -1,5 +1,6 @@
 
 from os.path import join
+from random import uniform
 
 from rabbyt.sprites import Sprite
 
@@ -68,4 +69,10 @@ class GameItem(object):
     def __set_alpha(self, value):
         self.sprite.alpha = value
     alpha = property(__get_alpha, __set_alpha)
+
+
+    def randomise_position(self, exclude_radius=0):
+        while (self.x*self.x + self.y*self.y) <= exclude_radius**2:
+            self.x = uniform(-4000, 4000)
+            self.y = uniform(-4000, 4000)
 
