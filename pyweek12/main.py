@@ -41,8 +41,7 @@ class Application(object):
         )
         self.camera = Camera((0, 0), scale=16)
         self.window.on_resize = self.camera.on_resize
-        self.cameraman = CameraMan(
-            self.camera, lambda: self.world.entryportal)
+        self.cameraman = CameraMan( self.camera )
         self.world.add(self.cameraman)
         self.render = Render(self.world, self.camera, self.options)
 

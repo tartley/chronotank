@@ -52,10 +52,6 @@ class World(object):
         Fires the self.item_added event.
         '''
         self.items[id(item)] = item
-        if isinstance(item, Tank):
-            self.player = item
-        if isinstance(item, EntryPortal):
-            self.entryportal = item
         self.item_added.fire(item)
 
     def remove(self, item):
