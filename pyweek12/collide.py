@@ -7,24 +7,26 @@ class Collide(object):
 
     def __init__(self, world):
         self.world = world
-        self.player = None
-        self.items = []
+        self.tanks = []
+        self.items_to_check = []
         world.item_added += self.item_added
         world.item_removed += self.item_removed
 
     def item_added(self, item):
         if item.collide:
-            self.items.append(item)
+            self.items_to_check.append(item)
         elif isinstance(item, Tank):
-            self.player = item
+            self.tanks.append(item)
 
     def item_removed(self, item):
         if item.collide:
-            self.items.remove(item)
-        elif item == self.player:
-            self.player = None
+            self.items_to_check.remove(item)
+        elif isinstance(item, Tank):
+            self.tanks.remove(item)
 
     def update(self):
-        if self.player:
-            collisions = aabb_collide_single(self.player, self.items)
+        for tank in self.tanks:
+            collisions = aabb_collide_single(tank, self.items_to_check)
+            if collisions:
+                tank.speed = 0
 

@@ -1,8 +1,6 @@
 
 from .color import Color
 from .event import Event
-from .items.tank import Tank
-from .items.portals import EntryPortal
 
 class World(object):
     '''
