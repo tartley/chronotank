@@ -55,13 +55,12 @@ class Render(object):
         self.camera.world_projection()
 
         # draw all entries in self.sprites
-        for layer in sorted(self.sprites.iterkeys()):
-            # dont render hud items
+        for layer in sorted(self.sprites):
+            sprites = self.sprites[layer]
             if layer == 4:
-                continue
-            rabbyt.render_unsorted( self.sprites[layer] )
-
-        self.draw_hud(self.sprites.get(4, []))
+                self.draw_hud(sprites)
+            else:
+                rabbyt.render_unsorted(sprites)
 
 
     def draw_hud(self, items):
@@ -69,10 +68,11 @@ class Render(object):
         Draw any display items overlaid on the world, such as FPS counter
         '''
         self.camera.hud_projection()
-        gl.glEnableClientState(gl.GL_VERTEX_ARRAY)
-        gl.glEnableClientState(gl.GL_COLOR_ARRAY)
 
         rabbyt.render_unsorted( items )
+        
+        gl.glEnableClientState(gl.GL_VERTEX_ARRAY)
+        gl.glEnableClientState(gl.GL_COLOR_ARRAY)
 
         if self.options.fps:
             if self.clock_display is None:
