@@ -16,7 +16,18 @@ def populate(world):
         world.add( Weed() )
         world.add( Flower() )
         world.add( Fronds() )
-        world.add( Wall() )
+    
+    room_size = 800
+
+    for roomx in [-2, 0, +2]:
+        for roomy in [-3, -1, +1, +3]:
+            wall = Wall(
+                x=roomx * room_size, y=roomy * room_size,
+                scale_x=3, rot=0
+            )
+            wall.sprite.scale_x = 3
+            world.add( wall )
+
     world.add( EntryPortal(0, 0) )
 
    
