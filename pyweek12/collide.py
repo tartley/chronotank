@@ -14,3 +14,6 @@ class Collide(object):
         if item.collide:
             self.items.remove(item)
 
+    def update(self):
+        pass
+

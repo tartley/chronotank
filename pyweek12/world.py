@@ -19,18 +19,12 @@ class World(object):
 
     ``self.item_removed``: event which is fired after an item is removed.
 
-    ``self.update``: event which is fired on every update. Items or
-        application code might want to register for this event if they want to
-        do some work every frame that doesn't fit well within the 'update'
-        method of an item.
-
     ``self.background_color``: color used to clear the screen before render
     '''
     def __init__(self):
         self.items = {}
         self.item_added = Event()
         self.item_removed = Event()
-        self.update = Event()
         self.background_color = Color.Orange
 
     def __iter__(self):
@@ -70,13 +64,11 @@ class World(object):
         self.item_removed.fire(item)
         item.position = None
 
-    def update_all(self, dt):
+    def update(self, dt):
         '''
         Calls item.update() on each item that has a populated update attribute.
-
         Fires the self.update event.
         '''
-        self.update.fire(dt)
         for item in self:
             if hasattr(item, 'update'):
                 item.update(dt)

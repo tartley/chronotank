@@ -8,7 +8,7 @@ from .gameitem import GameItem
 class Tank(GameItem):
 
     image_name = 'tank.png'
-    layer = 2
+    layer = 2 # player level
 
     def __init__(self, **kwargs):
         self.keystate = None

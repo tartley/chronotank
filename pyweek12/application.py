@@ -31,7 +31,8 @@ class Application(object):
 
     def on_update(self, raw_dt):
         dt = min(raw_dt, 1 / 30.0)
-        self.world.update_all(dt)
+        self.collide.update()
+        self.world.update(dt)
         self.window.invalid = True
         self.cameraman.update(dt)
 

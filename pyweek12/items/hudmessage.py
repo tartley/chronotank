@@ -3,9 +3,11 @@ from pyglet.gl import glColor4f
 import rabbyt
 
 from .gameitem import GameItem
+from ..path import DATA
 
-font.add_directory('pyweek12/data')
+font.add_directory(DATA)
 default_font = font.load('Computerfont', 48)
+
 
 class SpriteText(rabbyt.BaseSprite):
     def __init__(self, text, fnt=default_font, color=(1, 0.54, 0, 1), **kwargs):
