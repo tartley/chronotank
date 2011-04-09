@@ -1,0 +1,115 @@
+
+import sys
+
+import pyglet
+from pyglet.event import EVENT_HANDLED
+
+from .camera import Camera
+from .cameraman import CameraMan
+from .collide import Collide
+from .color import Color
+from .items.greenery import Tree, Weed, Flower, Fronds
+from .items.hudmessage import LivesMessage, TimeMessage
+from .items.portals import EntryPortal
+from .items.tank import Tank
+from .items.wall import Wall
+from .keyboard import Keyboard
+from .options import Options
+from .render import Render
+from .world import World
+
+
+def populate(world):
+    for _ in xrange(200):
+        world.add( Tree() )
+        world.add( Weed() )
+        world.add( Flower() )
+        world.add( Fronds() )
+        world.add( Wall() )
+    world.add( EntryPortal(0, 0) )
+
+    
+class Application(object):
+
+    def __init__(self):
+        self.options = Options(sys.argv)
+        self.world = World()
+        self.collide = Collide(self.world)
+        self.world.background_color = Color(0.1, 0.3, 0)
+        populate(self.world)
+        self.window = pyglet.window.Window(
+            fullscreen=self.options.fullscreen,
+            vsync=self.options.vsync,
+            visible=False,
+            resizable=True,
+        )
+        self.camera = Camera((0, 0), scale=16)
+        self.window.on_resize = self.camera.on_resize
+        self.cameraman = CameraMan( self.camera )
+        self.render = Render(self.world, self.camera, self.options)
+        self.keyboard = Keyboard(self.window, self.world, self.options)
+
+    def on_update(self, raw_dt):
+        dt = min(raw_dt, 1 / 30.0)
+        self.world.update_all(dt)
+        self.window.invalid = True
+        self.cameraman.update(dt)
+
+    def on_draw(self):
+        self.render.draw()
+        self.window.invalid = False
+        return EVENT_HANDLED
+
+    def run(self):
+        '''
+        Schedules calls to update, makes window visible and starts the
+        event loop by calling pyglet.app.run()
+        '''
+        pyglet.clock.schedule(self.on_update)
+        self.window.on_draw = self.on_draw
+        self.window.set_visible()
+        self.window.invalid = False
+        try:
+            pyglet.app.run()
+        except:
+            raise
+        finally:
+            self.window.close()
+
+
+
+class Game(Application):
+
+    def __init__(self):
+        Application.__init__(self)
+        self.lives = 9
+        pyglet.clock.schedule_once( self.start, 2)
+
+    def start(self, dt):
+        self.cameraman.scale = 800
+        lives_hud = LivesMessage(9)
+        time_hud = TimeMessage(4, self.window.width)
+
+        def insert_player(_):
+            if self.lives > 0:
+                player = Tank(x=0, y=0, speed=8)
+                self.world.add(player)
+                time_hud.set_time(4)
+                self.lives -= 1
+                lives_hud.update_lives(self.lives)
+                if self.lives > 0:
+                    pyglet.clock.schedule_once(insert_player, 4)
+                return player
+
+        def insert_first_player(_):
+            player = insert_player(None)
+            self.cameraman.get_follow = lambda: player
+            self.world.add(lives_hud)
+            self.world.add(time_hud)
+
+        pyglet.clock.schedule_once(insert_first_player, 1.5)
+
+
+def main():
+    Game().run()
+    

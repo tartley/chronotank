@@ -1,0 +1,177 @@
+Add a 'Press Any Key' start menu hud item. Pressing any key starts the
+camera zoom / launch player sequence (ie calls Game.start)
+
+Design levels and player interactions (e.g. draw out the placement of doors
+and switches)
+
+Code to play the music. Does it start at application startup, or at game
+start? Or as the players tank first appears?
+
+Sound effects:
+    * Engine noises - revs higher/faster as you accelerate.
+    * Static noise for the entry portal
+    * 'Pop' as you emerge from the entry portal
+    * 'Clang' on fast collision with rocks and walls
+    * Slight click as stone pressure plates are depressed
+    * rumble of large heavy stone doors opening
+    * Jungle noises!
+    * Pleasant flourish for point being scored
+    * Slight squeak for brakes being applied
+
+More SVG required:
+    * Boulders and rocky outcrops (circular collision boundaries, or collection
+      of several circles)
+    * Mayan ruins: buildings and walls, which will form axis-aligned rectangular
+      obstacles to define rooms, etc.
+    * Entry portal - flashy special effect which player emerges from. This will
+      hang around continuisly, so needs to be long-running cycling animation
+    * Goal portal - some variation on the entry portal (we could just do
+      this in code using the same SVG, adding color tints or different
+      animation params)
+
+Get Harry to record some voiceover announcements
+    Welcome
+    Chronotank
+    Game Over
+    Warning
+    Temporal stability breached!
+    5... 4... 3... 2... 1...
+   
+Use Rabbyt collision detection to see whether the player is colliding with
+anything. See advice at:
+http://groups.google.com/group/rabbyt/browse_frm/thread/9da3abc732599b76
+
+Add collision response, to stop the player driving through obstacles
+
+Add a countdown timer
+When timer reaches zero, player's position is reset to start
+
+Add a 'player echo', which replays the player's movements
+One new echo for each countdown
+
+Nine lives exactly.
+Display remaining lives on the HUD
+Game over after using ninth life
+
+Add pressure switches and doors.
+
+Sitting on a pressure switch opens a door.
+
+Several pressure switches may be required to open a single door.
+
+Add a 'goal portal' gameitem: any player image colliding with this successfully
+completes the game
+
+Goal portal only appears after completing final task in the level.
+Populate the word to create the layout of the level at game start.
+    - do we load levels from disk? Can we make an in-game level editor?
+
+Release brake after stopping and press it again to go into reverse,
+Reverse is half speed.
+
+Display congrats and score when game is completed 
+
+Score one for each item of progress towards the goal.
+(e.g. for each door opened, each threshold passed.)
+
+Display the score.
+
+pressure pads have a different appearance when depressed
+
+modify tank handling to allow for slight skids
+
+Animate the tank treads
+
+Brake lights come on when you brake.
+
+Reverse lights come on when you reverse.
+
+Leave tracks behind as you drive.
+
+Spurt out particle effect fountain of dirt behind you when accellerating.
+
+Fringing is visible on the edges of the rotated sprites. Either color the
+transparent pixels around the edges of the bitmaps the same color as their
+opaque neighbours, or pre-process the images and use a different blend mode.
+See: http://tartley.com/?p=945
+
+Make trees and bushes wobble and rotate as tank brushes past them:
+
+    add a Rabbyt "lerp" to the tree sprite's position, to make the tree wobble
+    back and forth in the direction of the tank's movement - as though the tank
+    was brushing by the tree, pushing it aside instead of knocking it down. The
+    position offset can then oscillate, damping quickly back to zero. Making
+    the oscilation damp down might be tricky. Perhaps schedule Pyglet events to
+    update the lerp parameters after enough time has passed for one complete
+    oscillation? This might cause visual discontinuities in the wobble
+    velocity, but would be much faster to execute than setting the tree
+    position manually yourself every frame. (applying a lerp to a sprite
+    attribute is C magic.)
+
+    Also, if a tree is off-centre from the tank's path, you could use a lerp on
+    the tree's sprite's .rot attribute, so that the tree rotates. The rotation
+    could also oscillate, so long as it starts in the correct direction. (e.g.
+    clockwise for a tank heading upwards on the left side of the tree) 
+
+Performance:
+  * Pyglet sprites in a batch are faster than rabbyt sprites, unless
+    they are moving. Use pyglet for immobile sprites.
+  * Don't render everything all the time - break world town into tiles,
+    only draw the 4 tiles that overlap the screen.
+
+test py2exe
+
+test py2app
+
+test cx_freeze
+
+
+Optional things to consider
+---------------------------
+
+Should player have a control to shortcut the countdown timer and move straight
+on to next 'life'? If so, and it is triggered, then the current player image
+does not just evaporate, but continues to sit in its current position until
+the end of game time (i.e. when the countdown timer would have expired.)
+
+Should player be able to shoot the gun? To what end?
+
+
+Done
+====
+
+Get some sprites onscreen, rendered by Rabbyt
+
+Add camera which can scroll around (to follow the player.) Also, as bonus,
+it can rotate or zoom in or out - not sure we'll use this. Maybe for
+special effect 'camera shake' on crashes
+
+convert cars into bushes, weeds, flowers
+
+Add a single tank
+
+Tank can be driven with keyboard
+    accel to accel
+    left and right to rotate
+    forward motion in direction tank is facing
+    cursors or WASD
+    brake to rapidly slow to a stop
+
+Camera follows player's vehicle.
+
+new SVG: Stone pressure pads in the ground which the tank will drive on to
+activate.
+    
+Render items in layers:
+    0 weeds, flowers - things your tank drives over.
+    1 tank images (previous player tanks.)
+    2 current tank
+    3 trees / bushes - things player drives under.
+    4 hud
+
+display the entry portal (start location for all lives) as a special effect.
+A scramble of chrono-static, obviously.
+
+Player emerges from entry portal at full speed, and coasts to a stop if no
+controls are pressed.
+
