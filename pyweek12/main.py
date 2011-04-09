@@ -11,6 +11,7 @@ from .items.greenery import Tree, Weed, Flower, Fronds
 from .items.hudmessage import LivesMessage, TimeMessage
 from .items.portals import EntryPortal
 from .items.tank import Tank
+from .items.wall import Wall
 from .keyboard import Keyboard
 from .options import Options
 from .render import Render
@@ -23,6 +24,8 @@ def populate(world):
         world.add( Weed() )
         world.add( Flower() )
         world.add( Fronds() )
+        world.add( Wall() )
+
     world.add( EntryPortal(0, 0) )
     
 class Application(object):
