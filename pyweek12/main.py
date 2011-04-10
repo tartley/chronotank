@@ -51,7 +51,7 @@ class Game(Application):
         populate(self.world)
         self.lives = 9
         pyglet.clock.schedule_once( self.start, 2)
-        audio.play()
+        audio.play(options.audio)
 
     def start(self, dt):
         self.cameraman.scale = 800

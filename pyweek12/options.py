@@ -3,7 +3,7 @@ print '  --novsync'
 print '  --window'
 print '  --fps'
 print '  --alsa|--openal|--directsound|--silent'
-
+print '  (try --silent if it crashes - sorry!)'
 
 class Options(object):
     '''
