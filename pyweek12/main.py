@@ -18,6 +18,9 @@ from .items.tank import Tank
 from .items.wall import Wall
 
 
+print "The game isn't finished - you can just drive around and that's it."
+
+
 def populate(world):
     for _ in xrange(200):
         world.add( Tree() )
