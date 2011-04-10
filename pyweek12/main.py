@@ -1,7 +1,15 @@
+import sys
 
 import pyglet
 
+from .options import Options
+options = Options(sys.argv)
+
+if options.audio:
+    pyglet.options['audio'] = (options.audio, 'silent')
+
 from .application import Application
+from . import audio
 from .color import Color
 from .items.greenery import Tree, Weed, Flower, Fronds
 from .items.hudmessage import LivesMessage, TimeMessage
@@ -16,36 +24,34 @@ def populate(world):
         world.add( Weed() )
         world.add( Flower() )
         world.add( Fronds() )
-    
+
     room_size = 800
 
     for roomx in [-2, 0, +2]:
         for roomy in [-3, -1, +1, +3]:
-            world.add( 
+            world.add(
                 Wall(
-                    x=roomx * room_size, y=roomy * room_size,
-                    scale_x=3, rot=0
+                    x=roomx * room_size, y=roomy * room_size, scale_x=3, rot=0
                 )
             )
-            world.add( 
+            world.add(
                 Wall(
-                    x=roomy * room_size, y=roomx * room_size,
-                    scale_x=3, rot=90
+                    x=roomy * room_size, y=roomx * room_size, scale_x=3, rot=90
                 )
             )
-
 
     world.add( EntryPortal(0, 0) )
 
-   
+
 class Game(Application):
 
-    def __init__(self):
-        Application.__init__(self)
+    def __init__(self, options):
+        Application.__init__(self, options)
         self.world.background_color = Color(0.1, 0.3, 0)
         populate(self.world)
         self.lives = 9
         pyglet.clock.schedule_once( self.start, 2)
+        audio.play()
 
     def start(self, dt):
         self.cameraman.scale = 800
@@ -73,5 +79,5 @@ class Game(Application):
 
 
 def main():
-    Game().run()
-    
+    Game(options).run()
+

@@ -16,7 +16,7 @@ class Tree(Greenery):
     layer = 3 # tree level
     def __init__(self, **kwargs):
         Greenery.__init__(self, **kwargs)
-        self.randomise_position(exclude_radius=1000)
+        self.randomise_position(exclude_radius=400)
         self.green = uniform(0.6, 1)
 
 
@@ -26,7 +26,7 @@ class Fronds(Tree):
     def __init__(self, **kwargs):
         Tree.__init__(self, **kwargs)
         self.green = uniform(0.5, 1)
-        
+
 class Flower(Greenery):
     image_name = 'flower.png'
     def __init__(self, **kwargs):

@@ -1,4 +1,3 @@
-import sys
 
 import pyglet
 from pyglet.event import EVENT_HANDLED
@@ -7,14 +6,13 @@ from .camera import Camera
 from .cameraman import CameraMan
 from .collide import Collide
 from .keyboard import Keyboard
-from .options import Options
 from .render import Render
 from .world import World
 
 class Application(object):
 
-    def __init__(self):
-        self.options = Options(sys.argv)
+    def __init__(self, options):
+        self.options = options
         self.world = World()
         self.collide = Collide(self.world)
         self.window = pyglet.window.Window(

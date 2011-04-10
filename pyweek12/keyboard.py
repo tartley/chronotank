@@ -4,6 +4,14 @@ from pyglet.window import key
 from .screenshot import screenshot
 
 
+print 'keys:'
+print '  WASD or arrows: steer, accellerate and brake'
+print '  alt-enter: toggle fullscreen'
+print '  f9: screenshot'
+print '  f12: toggle fps'
+print '  esc: exit'
+
+
 class Keyboard(object):
 
     def __init__(self, window, world, options):

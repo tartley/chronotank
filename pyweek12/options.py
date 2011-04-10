@@ -1,3 +1,9 @@
+print 'options:'
+print '  --novsync'
+print '  --window'
+print '  --fps'
+print '  --alsa|--openal|--directsound|--silent'
+
 
 class Options(object):
     '''
@@ -22,6 +28,17 @@ class Options(object):
         self.vsync = '--novsync' not in argv
         self.fullscreen = '--window' not in argv and '-w' not in argv
         self.fps = '--fps' in argv
+
+        self.audio = None
+        if '--alsa' in argv:
+            self.audio = 'alsa'
+        if '--openal' in argv:
+            self.audio = 'openal'
+        if '--silent' in argv:
+            self.audio = 'silent'
+        if '--directsound' in argv:
+            self.audio = 'directsound'
+
 
     def __str__(self):
         return 'Options:\n' + '\n'.join(
