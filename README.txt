@@ -1,42 +1,14 @@
-pyweek12
+Temporal Stability Breach!
+A game for PyWeek 12
 
 https://bitbucket.org/tartley/pyweek12
 
-run_game.py
+python -O run_game.py
 
-A game for PyWeek 12
 
 KEYBOARD:
-    Up: accellerate
-    Down: brake and reverse
-    Left, Right: steer
-MOUSE: 
-JOYSTICK: 
+    WASD or arrow keys
 
-
-
-
-
-Development notes 
------------------
-
-creating a source distribution
-------------------------------
-
-python setup.py sdist
-
-
-uploading to pypi
------------------
-
-python setup.py register
-python setup.py sdist upload
-
-
-uploading to pyweek
--------------------
-
-See pyweek_upload.py usage instructions when you run it.
-
-
+PLEASE NOTE: The game is severely not finished. Once you've seen the first
+ten seconds, you've seen everything there is to see.
 
