@@ -47,6 +47,18 @@ class GameItem(object):
         self.sprite.scale = value
     scale = property(__get_scale, __set_scale)
 
+    def __get_scale_x(self):
+        return self.sprite.scale_x
+    def __set_scale_x(self, value):
+        self.sprite.scale_x = value
+    scale_x = property(__get_scale_x, __set_scale_x)
+
+    def __get_scale_y(self):
+        return self.sprite.scale_y
+    def __set_scale_y(self, value):
+        self.sprite.scale_y = value
+    scale_y = property(__get_scale_y, __set_scale_y)
+
     def __get_red(self):
         return self.sprite.red
     def __set_red(self, value):

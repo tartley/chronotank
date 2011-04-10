@@ -21,12 +21,19 @@ def populate(world):
 
     for roomx in [-2, 0, +2]:
         for roomy in [-3, -1, +1, +3]:
-            wall = Wall(
-                x=roomx * room_size, y=roomy * room_size,
-                scale_x=3, rot=0
+            world.add( 
+                Wall(
+                    x=roomx * room_size, y=roomy * room_size,
+                    scale_x=3, rot=0
+                )
             )
-            wall.sprite.scale_x = 3
-            world.add( wall )
+            world.add( 
+                Wall(
+                    x=roomy * room_size, y=roomx * room_size,
+                    scale_x=3, rot=90
+                )
+            )
+
 
     world.add( EntryPortal(0, 0) )
 
